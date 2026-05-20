@@ -23,8 +23,8 @@ class TestController
     public function contact()
     {
         request()->validate([
-            'name' => 'required|string',
-            'message' => 'required|string',
+            'name' => 'required',
+            'message' => 'required',
         ]);
         $name = request('name');
         $message = request('message');
@@ -36,6 +36,21 @@ class TestController
             ],
         ]);
     }
+
+     public function contacts(){
+        return response()->json([
+            [
+            'id' => 1,
+            'name' => 'Ali',
+            'message' => 'Merhaba',
+        ],
+        [
+            'id' => 2,
+            'name' => 'Ayse',
+            'message' => 'Selam',
+        ],
+        ]);
+     }
 }
 
 ?>

@@ -12,3 +12,5 @@ Route::get('/ping',[TestController::class,'pingo']);
 Route ::get('/hello',[TestController::class,'Hello']);
 
 Route ::post('contact',[TestController::class,'contact']);
+
+Route::get('/contacts', [TestController::class, 'contacts']);

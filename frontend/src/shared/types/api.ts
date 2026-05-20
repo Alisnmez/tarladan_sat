@@ -17,3 +17,9 @@ export type ContactValidationErrorResponse = {
     message : string,
     errors : ContactValidationErrors
 }
+
+export type Contact = {
+    id:number,
+    name:string,
+    message:string
+}
