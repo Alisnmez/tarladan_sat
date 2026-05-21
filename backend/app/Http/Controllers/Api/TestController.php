@@ -1,6 +1,8 @@
 <?php 
 
 namespace App\Http\Controllers\Api;
+use App\Models\Contact;
+use Illuminate\Http\Request;
 
 class TestController
 {
@@ -20,36 +22,26 @@ class TestController
         ]);
     }
 
-    public function contact()
-    {
-        request()->validate([
-            'name' => 'required',
-            'message' => 'required',
-        ]);
-        $name = request('name');
-        $message = request('message');
-        return response() ->json([
-            'success' => true,
-            'data' => [
-                'name'=>$name,
-                'message' =>$message,
-            ],
-        ]);
-    }
+   public function contact(Request $request)
+{
+    $validated = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'message' => ['required', 'string'],
+    ]);
+
+    $contact = Contact::create([
+        'name' => $validated['name'],
+        'message' => $validated['message'],
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'data' => $contact,
+    ]);
+}
 
      public function contacts(){
-        return response()->json([
-            [
-            'id' => 1,
-            'name' => 'Ali',
-            'message' => 'Merhaba',
-        ],
-        [
-            'id' => 2,
-            'name' => 'Ayse',
-            'message' => 'Selam',
-        ],
-        ]);
+        return Contact::latest()->get();
      }
 }
 

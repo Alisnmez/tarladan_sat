@@ -17,9 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [isContactsLoading, setIsContactsLoading] = useState(false);
-
-  useEffect(() => {
-    async function getContacts() {
+async function getContacts() {
   setIsContactsLoading(true);
   setContactsError(null);
 
@@ -38,11 +36,13 @@ function App() {
     setContacts(data);
   } catch {
     setContactsError("Sunucuya bağlanırken bir hata oluştu");
+  }finally{
+      setIsContactsLoading(false);
   }
 
-  setIsContactsLoading(false);
 }
-
+  useEffect(() => {
+  
     getContacts();
   }, []);
 
@@ -54,6 +54,7 @@ function App() {
     setVeri(null);
     setIsLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
     const response = await fetch("http://127.0.0.1:8000/api/contact", {
       method: "POST",
       headers: {
@@ -65,7 +66,7 @@ function App() {
         message,
       }),
     });
-    const data = await response.json();
+    const data =  await response.json();
     if (!response.ok) {
       const errorData: ContactValidationErrorResponse = data;
       setError(errorData.message || "Bir hata oluştu");
@@ -75,6 +76,15 @@ function App() {
     }
     setIsLoading(false);
     setVeri(data);
+    setName("");
+    setMessage("");
+    await getContacts();
+    } catch {
+        setError("Sunucuya bağlanırken bir hata oluştu");
+       }finally{
+        setIsLoading(false);
+       }
+
   }
 
   return (
