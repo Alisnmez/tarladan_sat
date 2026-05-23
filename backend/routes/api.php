@@ -2,15 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\TestController;
+use App\Http\Controllers\Api\AuthController;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/ping',[TestController::class,'pingo']);
+Route::post('/register', [AuthController::class, 'register']);
 
-Route ::get('/hello',[TestController::class,'Hello']);
+Route::post('/login', [AuthController::class, 'login']);
 
-Route ::post('contact',[TestController::class,'contact']);
-
-Route::get('/contacts', [TestController::class, 'contacts']);
+Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');

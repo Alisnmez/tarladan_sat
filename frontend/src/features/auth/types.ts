@@ -1,0 +1,40 @@
+export type RegisterPayload = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+};
+
+export type LoginPayload = {
+  email: string;
+  password: string;
+};
+
+export type AuthUser = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: string;
+  phone: string | null;
+  city: string | null;
+  status: string;
+  email_verified_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type RegisterResponse = {
+  success: boolean;
+  message: string;
+  data?: {
+    user: AuthUser;
+  };
+  errors?: {
+    first_name?: string[];
+    last_name?: string[];
+    email?: string[];
+    password?: string[];
+  };
+};

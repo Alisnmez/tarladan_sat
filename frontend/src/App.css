@@ -1,184 +1,332 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+.register-shell {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 590px) minmax(0, 500px);
+  gap: 28px;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+  box-sizing: border-box;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
+.register-hero {
+  color: #f8f4ec;
+  background:
+    radial-gradient(circle at top, rgba(255, 208, 121, 0.28), transparent 34%),
+    linear-gradient(145deg, #36503b 0%, #24352a 48%, #18251d 100%);
+  border-radius: 36px;
+  padding: 48px;
+  min-height: 620px;
+  max-width: 590px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  justify-content: space-between;
+  box-shadow: 0 24px 60px rgba(15, 24, 19, 0.28);
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+.register-badge {
+  width: fit-content;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(248, 244, 236, 0.12);
+  border: 1px solid rgba(248, 244, 236, 0.18);
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.register-hero h1 {
+  margin: 24px 0 16px;
+  max-width: 10ch;
+  color: #fff8ef;
+  font-size: clamp(3rem, 5vw, 4.9rem);
+  line-height: 0.94;
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+.register-hero p {
+  max-width: 38rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(248, 244, 236, 0.84);
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.hero-points {
+  display: grid;
+  gap: 16px;
+  margin-top: 36px;
 }
 
-.ticks {
-  position: relative;
+.hero-points div {
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-points strong,
+.hero-points span {
+  display: block;
+}
+
+.hero-points strong {
+  margin-bottom: 8px;
+  color: #fff8ef;
+}
+
+.hero-points span {
+  color: rgba(248, 244, 236, 0.78);
+}
+
+.register-card {
   width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 32px;
+  background: rgba(255, 252, 247, 0.92);
+  border: 1px solid rgba(163, 127, 78, 0.14);
+  box-shadow: 0 20px 45px rgba(72, 52, 29, 0.12);
+  backdrop-filter: blur(18px);
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+.register-card__header h2 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+  color: #2f2618;
+}
+
+.register-card__header p {
+  color: #6d5d46;
+  line-height: 1.6;
+}
+
+.register-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+
+.field span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #433621;
+}
+
+.field input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid #d8cbb8;
+  border-radius: 18px;
+  font: inherit;
+  color: #2d2416;
+  background: #fffdf8;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.field input::placeholder {
+  color: #b19f84;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #7d9454;
+  box-shadow: 0 0 0 4px rgba(125, 148, 84, 0.15);
+  transform: translateY(-1px);
+}
+
+.field-error {
+  color: #b13f32;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.form-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  font-size: 0.92rem;
+}
+
+.status {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #f3ede1;
+  color: #7a6547;
+}
+
+.status--success {
+  background: #e1f1df;
+  color: #2f6b39;
+}
+
+.meta-note {
+  color: #8a7557;
+}
+
+.success-message,
+.error-message {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.success-message {
+  color: #24502b;
+  background: #e4f3e1;
+}
+
+.error-message {
+  color: #8d342c;
+  background: #fbe6e2;
+}
+
+.register-button {
+  border: 0;
+  border-radius: 18px;
+  padding: 16px 20px;
+  font: inherit;
+  font-weight: 700;
+  color: #fffaf1;
+  cursor: pointer;
+  background: linear-gradient(135deg, #698343 0%, #3f5b2c 100%);
+  box-shadow: 0 18px 30px rgba(63, 91, 44, 0.24);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.register-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+  box-shadow: 0 22px 34px rgba(63, 91, 44, 0.28);
+}
+
+.register-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 980px) {
+  .register-shell {
+    grid-template-columns: 1fr;
+    padding: 24px;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  .register-hero,
+  .register-card {
+    max-width: none;
+    min-height: auto;
+    padding: 28px;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  .register-hero h1 {
+    max-width: none;
+  }
+
+  .form-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .register-shell {
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .register-hero,
+  .register-card {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .register-hero h1 {
+    margin: 18px 0 14px;
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
+    line-height: 0.98;
+  }
+
+  .register-hero p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .register-card__header h2 {
+    font-size: 1.75rem;
+  }
+
+  .register-form {
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .field input,
+  .register-button {
+    padding: 15px 16px;
+    border-radius: 16px;
+  }
+
+  .hero-points {
+    gap: 12px;
+    margin-top: 26px;
+  }
+
+  .hero-points div {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .status,
+  .meta-note {
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-shell {
+    padding: 14px;
+  }
+
+  .register-hero,
+  .register-card {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .register-badge {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  .register-hero h1 {
+    font-size: clamp(2rem, 11vw, 2.7rem);
+  }
+
+  .register-card__header h2 {
+    font-size: 1.55rem;
+  }
+
+  .field span {
+    font-size: 0.9rem;
+  }
+
+  .field input,
+  .register-button {
+    font-size: 0.95rem;
+  }
+
+  .success-message,
+  .error-message {
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-size: 0.9rem;
   }
 }
