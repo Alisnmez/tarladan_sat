@@ -1,14 +1,25 @@
 import { useState } from "react";
 import "../../../App.css";
+import AuthTopbar from "../components/AuthTopbar";
 import { registerRequest } from "../api";
 import type { RegisterResponse } from "../types";
 
 type RegisterErrors = NonNullable<RegisterResponse["errors"]>;
 
+const CITY_OPTIONS = [
+  { value: "istanbul", label: "İstanbul" },
+  { value: "ankara", label: "Ankara" },
+  { value: "izmir", label: "İzmir" },
+  { value: "antalya", label: "Antalya" },
+  { value: "bursa", label: "Bursa" },
+];
+
 function RegisterPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [role, setRole] = useState<"buyer" | "producer">("buyer");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
@@ -35,6 +46,8 @@ function RegisterPage() {
         first_name: firstName,
         last_name: lastName,
         email,
+        city,
+        role,
         password,
         password_confirmation: passwordConfirmation,
       });
@@ -55,118 +68,221 @@ function RegisterPage() {
   };
 
   return (
-    <main className="register-shell">
-      <section className="register-hero">
-        <span className="register-badge">Tarladan Sat</span>
-        <h1>Üreticiden sofraya uzanan yolculuğa katılın.</h1>
-        <p>
-          Satıcı hesabınızı oluşturun, ürünlerinizi yönetin ve doğal üretiminizi
-          daha fazla kişiye ulaştırın.
-        </p>
+    <div className="login-template">
+      <AuthTopbar />
+      <main className="signup-screen">
+      <section className="signup-visual">
+        <div className="signup-visual__image" />
+        <div className="signup-visual__overlay" />
+        <div className="signup-visual__content">
+          <div className="signup-brand">Tarladan Sat</div>
 
-        <div className="hero-points">
-          <div>
-            <strong>Hızlı başlangıç</strong>
-            <span>Birkaç adımda hesabınızı oluşturup yayına geçin.</span>
+          <div className="signup-visual__copy">
+            <h1>Yerel üretimin parçası olun</h1>
+            <p>
+              Doğrudan tarladan sofraya bir köprü kuruyoruz. Toprağın
+              bereketini paylaşan üretici ve bilinçli tüketiciler arasına
+              katılın.
+            </p>
           </div>
-          <div>
-            <strong>Güvenli hesap</strong>
-            <span>Şifre doğrulamasıyla daha güvenli bir kayıt akışı.</span>
+
+          <div className="signup-proof">
+            <div className="signup-proof__avatars" aria-hidden="true">
+              <span className="signup-proof__avatar signup-proof__avatar--one" />
+              <span className="signup-proof__avatar signup-proof__avatar--two" />
+              <span>+12k</span>
+            </div>
+            <p>Üreticilerimiz tarafından desteklenen topluluğa katılın</p>
           </div>
         </div>
       </section>
 
-      <section className="register-card">
-        <div className="register-card__header">
-          <h2>Kayıt Ol</h2>
-          <p>Yeni hesabınızı oluşturmak için bilgilerinizi girin.</p>
-        </div>
+      <section className="signup-panel">
+        <div className="signup-panel__inner">
+          <a href="#/login" className="signup-back-link">
+            <span aria-hidden="true">←</span>
+            Ana Sayfaya Dön
+          </a>
 
-        <form className="register-form" onSubmit={handleRegister}>
-          <label className="field">
-            <span>Ad</span>
-            <input
-              type="text"
-              placeholder="Örn. Ayşe"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            {errors.first_name && (
-              <small className="field-error">{errors.first_name[0]}</small>
-            )}
-          </label>
-
-          <label className="field">
-            <span>Soyad</span>
-            <input
-              type="text"
-              placeholder="Örn. Yılmaz"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-            {errors.last_name && (
-              <small className="field-error">{errors.last_name[0]}</small>
-            )}
-          </label>
-
-          <label className="field">
-            <span>E-posta</span>
-            <input
-              type="email"
-              placeholder="ornek@mail.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            {errors.email && (
-              <small className="field-error">{errors.email[0]}</small>
-            )}
-          </label>
-
-          <label className="field">
-            <span>Şifre</span>
-            <input
-              type="password"
-              placeholder="En az 8 karakter"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {errors.password && (
-              <small className="field-error">{errors.password[0]}</small>
-            )}
-          </label>
-
-          <label className="field">
-            <span>Şifre Tekrar</span>
-            <input
-              type="password"
-              placeholder="Şifrenizi yeniden girin"
-              value={passwordConfirmation}
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
-            />
-          </label>
-
-          <div className="form-meta">
-            <span
-              className={passwordsMatch ? "status status--success" : "status"}
-            >
-              {password.length === 0 && passwordConfirmation.length === 0
-                ? "Şifrenizi belirleyin"
-                : passwordsMatch
-                  ? "Şifreler eşleşiyor"
-                  : "Şifreler henüz eşleşmiyor"}
-            </span>
-            <span className="meta-note">
-              Bilgileriniz güvenli biçimde saklanır.
-            </span>
+          <div className="signup-panel__header">
+            <h2>Hesap Oluşturun</h2>
+            <p>Tazeliğin yolculuğuna bugün başlayın.</p>
           </div>
-          {message && <p className="success-message">{message}</p>}
-          {error && <p className="error-message">{error}</p>}
-          <button type="submit" className="register-button" disabled={loading}>
-            {loading ? "Kaydediliyor..." : "Hesap Oluştur"}
-          </button>
-        </form>
+
+          {(message || error) && (
+            <div
+              className={`signup-status ${
+                error ? "signup-status--error" : "signup-status--success"
+              }`}
+            >
+              <span aria-hidden="true">{error ? "!" : "✓"}</span>
+              <span>{error || message}</span>
+            </div>
+          )}
+
+          <form className="signup-form" onSubmit={handleRegister}>
+            <div className="signup-form__row signup-form__row--double">
+              <label className="signup-field">
+                <span>Ad</span>
+                <input
+                  type="text"
+                  placeholder="Örn: Ahmet"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+                {errors.first_name && (
+                  <small className="field-error">{errors.first_name[0]}</small>
+                )}
+              </label>
+
+              <label className="signup-field">
+                <span>Soyad</span>
+                <input
+                  type="text"
+                  placeholder="Örn: Yılmaz"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                {errors.last_name && (
+                  <small className="field-error">{errors.last_name[0]}</small>
+                )}
+              </label>
+            </div>
+
+            <label className="signup-field">
+              <span>E-posta</span>
+              <input
+                type="email"
+                placeholder="ahmet@ornek.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {errors.email && (
+                <small className="field-error">{errors.email[0]}</small>
+              )}
+            </label>
+
+            <label className="signup-field">
+              <span>Şehir</span>
+              <select value={city} onChange={(e) => setCity(e.target.value)}>
+                <option value="" disabled>
+                  Lütfen şehir seçin
+                </option>
+                {CITY_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              {errors.city && (
+                <small className="field-error">{errors.city[0]}</small>
+              )}
+            </label>
+
+            <div className="signup-role-group">
+              <span className="signup-role-group__label">Kullanıcı Tipi</span>
+              <div className="signup-role-grid">
+                <label
+                  className={`signup-role-card ${
+                    role === "buyer" ? "signup-role-card--active" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="role"
+                    value="buyer"
+                    checked={role === "buyer"}
+                    onChange={() => setRole("buyer")}
+                  />
+                  <strong>Alıcı</strong>
+                  <span>Ürünleri keşfet ve güvenle satın al.</span>
+                </label>
+
+                <label
+                  className={`signup-role-card ${
+                    role === "producer" ? "signup-role-card--active" : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="role"
+                    value="producer"
+                    checked={role === "producer"}
+                    onChange={() => setRole("producer")}
+                  />
+                  <strong>Üretici</strong>
+                  <span>Ürünlerini listele ve topluluğa ulaş.</span>
+                </label>
+              </div>
+              {errors.role && (
+                <small className="field-error">{errors.role[0]}</small>
+              )}
+            </div>
+
+            <div className="signup-form__row signup-form__row--double">
+              <label className="signup-field">
+                <span>Şifre</span>
+                <input
+                  type="password"
+                  placeholder="En az 8 karakter"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {errors.password && (
+                  <small className="field-error">{errors.password[0]}</small>
+                )}
+              </label>
+
+              <label className="signup-field">
+                <span>Şifre Tekrar</span>
+                <input
+                  type="password"
+                  placeholder="Şifrenizi yeniden girin"
+                  value={passwordConfirmation}
+                  onChange={(e) => setPasswordConfirmation(e.target.value)}
+                />
+              </label>
+            </div>
+
+            <div className="signup-form__footer">
+              <span
+                className={`signup-password-hint ${
+                  passwordsMatch ? "signup-password-hint--success" : ""
+                }`}
+              >
+                {password.length === 0 && passwordConfirmation.length === 0
+                  ? "Şifrenizi belirleyin"
+                  : passwordsMatch
+                  ? "Şifreler eşleşiyor"
+                    : "Şifreler henüz eşleşmiyor"}
+              </span>
+            </div>
+
+            <button
+              type="submit"
+              className="signup-submit-button"
+              disabled={loading}
+            >
+              <span>{loading ? "İşleniyor..." : "Kaydı Tamamla"}</span>
+              <span aria-hidden="true">→</span>
+            </button>
+
+            <p className="signup-switch">
+              Zaten bir hesabın var mı?
+              <a href="#/login">Giriş Yap</a>
+            </p>
+          </form>
+
+          <div className="signup-legal">
+            <p>
+              Kaydolurken Kullanım Koşullarını ve Gizlilik Politikasını kabul
+              etmiş olursunuz.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
+    </div>
   );
 }
 

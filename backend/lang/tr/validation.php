@@ -12,6 +12,8 @@ return [
 
     'regex' => ':attribute yalnızca harf, boşluk ve nokta içerebilir.',
 
+    'in' => ':attribute için geçerli bir seçim yapmalısınız.',
+
     'min' => [
         'string' => ':attribute en az :min karakter olmalıdır.',
     ],
@@ -24,6 +26,8 @@ return [
         'first_name' => 'Ad',
         'last_name' => 'Soyad',
         'email' => 'E-posta',
+        'city' => 'Şehir',
+        'role' => 'Kullanıcı tipi',
         'password' => 'Şifre',
         'password_confirmation' => 'Şifre Tekrar',
     ],

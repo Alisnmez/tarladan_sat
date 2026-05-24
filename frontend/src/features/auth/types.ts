@@ -2,6 +2,8 @@ export type RegisterPayload = {
   first_name: string;
   last_name: string;
   email: string;
+  city: string;
+  role: "buyer" | "producer";
   password: string;
   password_confirmation: string;
 };
@@ -9,6 +11,18 @@ export type RegisterPayload = {
 export type LoginPayload = {
   email: string;
   password: string;
+};
+
+export type LoginResponse = {
+  success: boolean;
+  message: string;
+  data?: {
+    user: AuthUser;
+  };
+  errors?: {
+    email?: string[];
+    password?: string[];
+  };
 };
 
 export type AuthUser = {
@@ -32,6 +46,8 @@ export type RegisterResponse = {
     user: AuthUser;
   };
   errors?: {
+    city?: string[];
+    role?: string[];
     first_name?: string[];
     last_name?: string[];
     email?: string[];

@@ -22,6 +22,8 @@ class AuthController extends Controller
             'first_name' => ['required', 'string', 'max:75', 'regex:/^[\pL\s\.]+$/u'],
             'last_name' => ['required', 'string', 'max:75', 'regex:/^[\pL\s\.]+$/u'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'city' => ['required', 'string', 'max:100'],
+            'role' => ['required', 'in:buyer,producer'],
             'password' => ['required', 'min:6', 'confirmed'],
         ]);
 
@@ -30,7 +32,8 @@ class AuthController extends Controller
             'last_name' => $validated['last_name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => 'buyer',
+            'city' => $validated['city'],
+            'role' => $validated['role'],
             'status' => 'active',
         ]);
         return response()->json([

@@ -1,4 +1,5 @@
 import type {
+  LoginResponse,
   LoginPayload,
   RegisterPayload,
   RegisterResponse,
@@ -27,7 +28,9 @@ export async function registerRequest(
   return data;
 }
 
-export async function loginRequest(payload: LoginPayload): Promise<unknown> {
+export async function loginRequest(
+  payload: LoginPayload,
+): Promise<LoginResponse> {
   const response = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
     headers: {
@@ -37,7 +40,7 @@ export async function loginRequest(payload: LoginPayload): Promise<unknown> {
     body: JSON.stringify(payload),
   });
 
-  const data = await response.json();
+  const data = (await response.json()) as LoginResponse;
 
   if (!response.ok) {
     throw data;
