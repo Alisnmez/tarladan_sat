@@ -4,6 +4,7 @@ import AuthTopbar from "../components/AuthTopbar";
 import { setAuthSession } from "../authSession";
 import { loginRequest } from "../api";
 import type { LoginResponse } from "../types";
+import { meRequest } from "../api";
 
 type LoginErrors = NonNullable<LoginResponse["errors"]>;
 
@@ -30,7 +31,11 @@ function LoginPage() {
         email,
         password,
       });
+      console.log("LOGIN:", data);
 
+      const meData = await meRequest();
+  
+      console.log("MEE:", meData);
       if (data.data?.user) {
         setAuthSession(data.data.user);
       }

@@ -5,6 +5,7 @@ import HowItWorksPage from "../features/how-it-works/pages/HowItWorksPage";
 import HomePage from "../features/home/pages/HomePage";
 import ProductsPage from "../features/discover/pages/ProductsPage";
 import { isAuthenticated } from "../features/auth/authSession";
+import { checkAuth } from "../features/auth/services/checkAuth";
 
 type AppPage = "login" | "register" | "how-it-works" | "home" | "discover";
 
@@ -36,7 +37,19 @@ function getCurrentPage(): AppPage {
 
 function App() {
   const [currentPage, setCurrentPage] = useState<AppPage>(getCurrentPage());
-
+  const [authChecked, setAuthChecked] = useState(false);
+  useEffect(() => {
+    async function bootstrapAuth() {
+      await checkAuth();
+  
+      setCurrentPage(getCurrentPage());
+  
+      setAuthChecked(true);
+    }
+  
+    bootstrapAuth();
+  }, []);
+ 
   useEffect(() => {
     const handleHashChange = () => {
       setCurrentPage(getCurrentPage());
@@ -48,7 +61,10 @@ function App() {
       window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
-
+  
+  if (!authChecked) {
+    return <div>Loading...</div>;
+  }
   if (currentPage === "home") {
     return <HomePage />;
   }

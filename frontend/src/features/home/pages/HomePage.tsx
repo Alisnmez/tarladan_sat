@@ -1,11 +1,15 @@
+import { getAuthSession } from "../../auth/authSession";
 import SiteNavbar from "../../layout/SiteNavbar";
 import "../HomePage.css";
 
 const HERO_IMAGE =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBE61S58jaLjQruXgsF2xVeHPc7JMMBVlEQDsbDFq3GCFwI5PEeWDXGD1LPmHWz_tLa8VJuH2DUDYTV1wFHzi8OJB5vv-81-71hXmTS2an-8pLMWog4bGuEfdNyXAVtweu6ZRDKGSRFCh-gksOpNO-agyDyKjOqGh5YpywGUa3QG5ORLdUZLN8teNZQ5V3HbZvpqhON-Erwfb0hLBMBcuZve3H-xE9fbA_3vrddnyKR_yD-_wuaJPRPGq9eN9tHeUFpaFCQmNXs15w";
 
+type BadgeVariant = "primary" | "secondary";
+
 type FeaturedProduct = {
   badge: string;
+  badgeVariant: BadgeVariant;
   title: string;
   producer: string;
   location: string;
@@ -15,6 +19,7 @@ type FeaturedProduct = {
 const featuredProducts: FeaturedProduct[] = [
   {
     badge: "Organik",
+    badgeVariant: "primary",
     title: "Köy Yumurtası",
     producer: "Ahmet Amca'nın Çiftliği",
     location: "Çatalca, İstanbul",
@@ -23,6 +28,7 @@ const featuredProducts: FeaturedProduct[] = [
   },
   {
     badge: "Yeni Hasat",
+    badgeVariant: "secondary",
     title: "Taze Domates",
     producer: "Güneşli Bahçeler",
     location: "Torbalı, İzmir",
@@ -31,6 +37,7 @@ const featuredProducts: FeaturedProduct[] = [
   },
   {
     badge: "Soğuk Sıkım",
+    badgeVariant: "primary",
     title: "Zeytinyağı",
     producer: "Ege Esintisi Kooperatifi",
     location: "Edremit, Balıkesir",
@@ -39,6 +46,7 @@ const featuredProducts: FeaturedProduct[] = [
   },
   {
     badge: "Tatlı",
+    badgeVariant: "secondary",
     title: "Mandalina",
     producer: "Yeşil Vadi Çiftliği",
     location: "Bodrum, Muğla",
@@ -47,59 +55,137 @@ const featuredProducts: FeaturedProduct[] = [
   },
 ];
 
+const steps = [
+  {
+    icon: "search",
+    title: "1. Keşfet",
+    description:
+      "Konumunuza en yakın üreticileri ve taze ürünlerini listelerden kolayca bulun.",
+  },
+  {
+    icon: "forward_to_inbox",
+    title: "2. Talep Gönder",
+    description:
+      "İstediğiniz miktarı belirtin ve üreticiye doğrudan satın alma talebi iletin.",
+  },
+  {
+    icon: "handshake",
+    title: "3. Anlaşmayı Tamamla",
+    description:
+      "Üretici ile detayları netleştirin, güvenli takip sistemi ile süreci yönetin.",
+  },
+];
+
+const buyerBenefits = [
+  {
+    icon: "verified",
+    title: "Doğrudan Temas",
+    description: "Aracıları devreden çıkararak taze ürüne gerçek fiyatıyla ulaşın.",
+  },
+  {
+    icon: "distance",
+    title: "Yerel Güç",
+    description:
+      "Kendi bölgenizdeki üreticileri destekleyerek karbon ayak izinizi azaltın.",
+  },
+  {
+    icon: "inventory_2",
+    title: "Toptan & Perakende",
+    description: "İster bir sepet, ister bir kamyon; ihtiyacınız kadarını talep edin.",
+  },
+];
+
+const producerBenefits = [
+  {
+    icon: "trending_up",
+    title: "Pazar Genişliği",
+    description: "Ürünlerinizi sadece yerel pazara değil, tüm Türkiye'ye sergileyin.",
+  },
+  {
+    icon: "chat",
+    title: "Kolay İletişim",
+    description: "Talepleri panel üzerinden yönetin, müşterilerinizle doğrudan anlaşın.",
+  },
+  {
+    icon: "assignment_turned_in",
+    title: "Ücretsiz İlan",
+    description: "Karmaşık süreçlerle uğraşmadan dakikalar içinde ürünlerinizi ekleyin.",
+  },
+];
+
+const trustStats = [
+  { value: "10k+", label: "Doğrulanmış Üretici" },
+  { value: "50k+", label: "Başarılı İşlem" },
+  { value: "4", label: "Şehirde Hizmet" },
+  { value: "%98", label: "Memnuniyet" },
+];
+
 function HomePage() {
+  const user = getAuthSession();
+  const displayName = user
+    ? `${user.first_name} ${user.last_name}`
+    : "Hesabım";
+
   return (
     <div className="home">
-      <SiteNavbar activePage="home" />
+      <SiteNavbar
+        activePage="discover"
+        omitHomeLink
+        userAccountChip
+        userDisplayName={displayName}
+      />
 
       <main className="home-main">
         <section className="home-hero">
           <div className="home-hero__media" aria-hidden="true">
-            <img src={HERO_IMAGE} alt="" />
+            <img className="home-hero__image" src={HERO_IMAGE} alt="" />
             <div className="home-hero__overlay" />
           </div>
 
-          <div className="home-hero__content">
+          <div className="home-hero__copy">
             <h1>Ürünü halden değil, doğrudan üreticiden keşfet.</h1>
             <p>
               Yakınındaki üreticileri bul, ürünleri incele, talep gönder ve anlaşma
               sürecini kolayca takip et.
             </p>
-
-            <form className="home-search" onSubmit={(e) => e.preventDefault()}>
-              <div className="home-search__field">
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  search
-                </span>
-                <input placeholder="Ne aramıştınız? (Domates, Zeytinyağı...)" />
-              </div>
-              <div className="home-search__field">
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  location_on
-                </span>
-                <input placeholder="Şehir veya ilçe seçin" />
-              </div>
-              <div className="home-search__field">
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  store
-                </span>
-                <select defaultValue="all">
-                  <option value="all">Tüm Satış Tipleri</option>
-                  <option value="wholesale">Toptan</option>
-                  <option value="retail">Perakende</option>
-                </select>
-              </div>
-              <button className="home-search__submit" type="submit">
-                Ara
-              </button>
-            </form>
           </div>
+
+          <form className="home-search" onSubmit={(e) => e.preventDefault()}>
+            <div className="home-search__field">
+              <span className="material-symbols-outlined" aria-hidden="true">
+                search
+              </span>
+              <input
+                type="text"
+                placeholder="Ne aramıştınız? (Domates, Zeytinyağı...)"
+              />
+            </div>
+            <div className="home-search__field">
+              <span className="material-symbols-outlined" aria-hidden="true">
+                location_on
+              </span>
+              <input type="text" placeholder="Şehir veya ilçe seçin" />
+            </div>
+            <div className="home-search__field">
+              <span className="material-symbols-outlined" aria-hidden="true">
+                store
+              </span>
+              <select defaultValue="all">
+                <option value="all">Tüm Satış Tipleri</option>
+                <option value="wholesale">Toptan</option>
+                <option value="retail">Perakende</option>
+              </select>
+            </div>
+            <button className="home-search__submit" type="submit">
+              Ara
+            </button>
+          </form>
         </section>
 
         <section className="home-featured">
           <div className="home-featured__header">
             <div>
-              <span>Sezonun En İyileri</span>
+              <span className="home-featured__eyebrow">Sezonun En İyileri</span>
               <h2>Öne Çıkan Ürünler</h2>
             </div>
             <a className="home-featured__more" href="#/discover">
@@ -115,7 +201,11 @@ function HomePage() {
               <article className="home-card" key={product.title}>
                 <div className="home-card__image">
                   <img src={product.image} alt={product.title} loading="lazy" />
-                  <span className="home-card__badge">{product.badge}</span>
+                  <span
+                    className={`home-card__badge home-card__badge--${product.badgeVariant}`}
+                  >
+                    {product.badge}
+                  </span>
                 </div>
                 <div className="home-card__body">
                   <h3>{product.title}</h3>
@@ -125,7 +215,7 @@ function HomePage() {
                     </span>
                     <span>{product.producer}</span>
                   </div>
-                  <div className="home-card__meta">
+                  <div className="home-card__meta home-card__meta--location">
                     <span className="material-symbols-outlined" aria-hidden="true">
                       location_on
                     </span>
@@ -140,24 +230,177 @@ function HomePage() {
           </div>
         </section>
 
-        <footer className="home-footer">
-          <div className="home-footer__inner">
-            <div>
-              <div className="home-footer__brand">Tarladan Sat</div>
-              <p>Yerel üretimin gücünü dijital dünyanın imkanlarıyla birleştiriyoruz.</p>
-            </div>
-            <div className="home-footer__links">
-              <a href="#/how-it-works">Hakkımızda</a>
-              <a href="#/how-it-works">Güven ve Doğrulama</a>
-              <a href="#/how-it-works">Blog</a>
-              <a href="#/how-it-works">İletişim</a>
+        <section className="home-steps">
+          <div className="home-steps__inner">
+            <h2>Sadece 3 Adımda Tarladan Kapınıza</h2>
+            <div className="home-steps__grid">
+              <div className="home-steps__connector" aria-hidden="true" />
+              {steps.map((step) => (
+                <div className="home-steps__item" key={step.title}>
+                  <div className="home-steps__icon">
+                    <span className="material-symbols-outlined" aria-hidden="true">
+                      {step.icon}
+                    </span>
+                  </div>
+                  <h4>{step.title}</h4>
+                  <p>{step.description}</p>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="home-footer__bottom">
-            <span>© 2024 Tarladan Sat. Yerel Üretimin Gücü.</span>
+        </section>
+
+        <section className="home-benefits">
+          <div className="home-benefits__grid">
+            <div className="home-benefits__panel home-benefits__panel--buyer">
+              <h3>
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  shopping_bag
+                </span>
+                Alıcılar İçin
+              </h3>
+              <ul>
+                {buyerBenefits.map((item) => (
+                  <li key={item.title}>
+                    <div className="home-benefits__icon home-benefits__icon--buyer">
+                      <span className="material-symbols-outlined" aria-hidden="true">
+                        {item.icon}
+                      </span>
+                    </div>
+                    <div>
+                      <h5>{item.title}</h5>
+                      <p>{item.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="home-benefits__panel home-benefits__panel--producer">
+              <h3>
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  agriculture
+                </span>
+                Üreticiler İçin
+              </h3>
+              <ul>
+                {producerBenefits.map((item) => (
+                  <li key={item.title}>
+                    <div className="home-benefits__icon home-benefits__icon--producer">
+                      <span className="material-symbols-outlined" aria-hidden="true">
+                        {item.icon}
+                      </span>
+                    </div>
+                    <div>
+                      <h5>{item.title}</h5>
+                      <p>{item.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </footer>
+        </section>
+
+        <section className="home-trust">
+          <div className="home-trust__inner">
+            <div className="home-trust__badge">
+              <span
+                className="material-symbols-outlined home-trust__badge-icon"
+                aria-hidden="true"
+              >
+                verified_user
+              </span>
+              Güvenli Alışveriş Altyapısı
+            </div>
+            <h2>Doğrulanmış Üreticiler, Şeffaf Süreç</h2>
+            <p>
+              Tarladan Sat platformu üzerinde yer alan üreticiler, kimlik ve üretim yeri
+              doğrulamasından geçer. Tüm talep ve anlaşma süreci sistem üzerinden kayıt
+              altına alınarak hem alıcı hem satıcı korunur.
+            </p>
+            <div className="home-trust__stats">
+              {trustStats.map((stat) => (
+                <div key={stat.label}>
+                  <div className="home-trust__stat-value">{stat.value}</div>
+                  <div className="home-trust__stat-label">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer className="home-footer">
+        <div className="home-footer__grid">
+          <div className="home-footer__brand-col">
+            <div className="home-footer__brand">Tarladan Sat</div>
+            <p>
+              Yerel üretimin gücünü dijital dünyanın imkanlarıyla birleştiriyoruz.
+            </p>
+            <div className="home-footer__social">
+              <a href="#/home" aria-label="Web sitesi">
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  public
+                </span>
+              </a>
+              <a href="#/home" aria-label="E-posta">
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  alternate_email
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h6>Kurumsal</h6>
+            <ul>
+              <li>
+                <a href="#/how-it-works">Hakkımızda</a>
+              </li>
+              <li>
+                <a href="#/how-it-works">Güven ve Doğrulama</a>
+              </li>
+              <li>
+                <a href="#/how-it-works">Blog</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h6>Yardım</h6>
+            <ul>
+              <li>
+                <a href="#/how-it-works">Kullanım Koşulları</a>
+              </li>
+              <li>
+                <a href="#/how-it-works">KVKK</a>
+              </li>
+              <li>
+                <a href="#/how-it-works">İletişim</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h6>Bülten</h6>
+            <p className="home-footer__newsletter-note">
+              Yeni hasat dönemlerinden ve özel indirimlerden haberdar olun.
+            </p>
+            <form
+              className="home-footer__newsletter"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input type="email" placeholder="E-posta adresi" />
+              <button type="submit">Katıl</button>
+            </form>
+          </div>
+        </div>
+
+        <div className="home-footer__bottom">
+          <p>© 2024 Tarladan Sat. Yerel Üretimin Gücü.</p>
+        </div>
+      </footer>
     </div>
   );
 }
