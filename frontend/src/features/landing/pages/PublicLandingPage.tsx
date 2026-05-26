@@ -1,4 +1,4 @@
-import "../HowItWorksPage.css";
+import "../PublicLandingPage.css";
 
 const HERO_IMAGE =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuC_wRjj9lDMPmFYfw1oNRl92aKi208HZqaT08q3gi1-np7Q7OQQNvdxEGtiYS2_TITNoM_wQPlTWFHxDh9Kfz0HPeL6d280DCKsbU4emrHj98YFWMYPUxb3sDMdOH-5UiCpaRTRdg-5enA_RdkdIz4sjiYD17YeM5DX1oWizkDP_CiS90KAm7iatK4wx9mQmGPXJygepQg1BM3bZUHld_2oWKRD93XYyuQyUr4TXKoLI3k7unFUyF1f6KarzOI8OQKckVoHwmNttg0";
@@ -87,92 +87,109 @@ type ProcessStep = {
   description: string;
 };
 
-function ProcessStepList({
-  steps,
+function StepColumn({
+  title,
+  badge,
   variant,
+  steps,
 }: {
-  steps: ProcessStep[];
+  title: string;
+  badge: string;
   variant: "buyer" | "producer";
+  steps: ProcessStep[];
 }) {
   return (
-    <div className="how-process__steps">
-      {steps.map((step) => (
-        <div className="how-process__step" key={step.title}>
-          <div
-            className={`how-process__step-icon how-process__step-icon--${variant}`}
-          >
-            <span className="material-symbols-outlined">{step.icon}</span>
+    <div className="landing-process__column">
+      <div className="landing-process__heading">
+        <span className={`landing-process__badge landing-process__badge--${variant}`}>
+          {badge}
+        </span>
+        <h2>{title}</h2>
+      </div>
+
+      <div className="landing-process__steps">
+        {steps.map((step) => (
+          <div className="landing-process__step" key={step.title}>
+            <div className={`landing-process__icon landing-process__icon--${variant}`}>
+              <span className="material-symbols-outlined">{step.icon}</span>
+            </div>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
           </div>
-          <div>
-            <h3>{step.title}</h3>
-            <p>{step.description}</p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
 
-function HowItWorksPage() {
+function PublicLandingPage() {
   return (
-    <div className="how-it-works">
-      <main className="how-main how-main--with-site-nav">
-        <section className="how-hero">
-          <div className="how-hero__media">
-            <img src={HERO_IMAGE} alt="Gün doğumunda Türk tarlası manzarası" />
-            <div className="how-hero__gradient" />
+    <div className="landing-page">
+      <main className="landing-page__main">
+        <section className="landing-hero">
+          <div className="landing-hero__media">
+            <img src={HERO_IMAGE} alt="Güneş ışığında verimli tarla" />
+            <div className="landing-hero__overlay" />
           </div>
-          <div className="how-hero__content">
-            <h1>Tarladan Sofraya Güvenli Yolculuk</h1>
+
+          <div className="landing-hero__content">
+            <h1>Tarladan Sofraya En Kısa Yol</h1>
             <p>
-              Yerel üreticilerle tüketicileri aracısız buluşturuyor, Anadolu&apos;nun
-              en taze ürünlerini kapınıza kadar getiriyoruz.
+              Yerel üreticilerle doğrudan bağ kurun. Anadolu&apos;nun en taze, doğal
+              ve güvenilir ürünlerini aracısız keşfedin, toprağın bereketini
+              destekleyin.
             </p>
-          </div>
-        </section>
 
-        <section className="how-process">
-          <div className="how-process__inner">
-            <div className="how-process__column">
-              <div className="how-process__heading">
-                <span className="how-process__badge how-process__badge--buyer">
-                  Tüketiciler İçin
-                </span>
-                <h2>Nasıl Alırım?</h2>
-              </div>
-              <ProcessStepList steps={buyerSteps} variant="buyer" />
-            </div>
-
-            <div className="how-process__divider" aria-hidden="true" />
-
-            <div className="how-process__column">
-              <div className="how-process__heading">
-                <span className="how-process__badge how-process__badge--producer">
-                  Üreticiler İçin
-                </span>
-                <h2 className="how-process__title--secondary">Nasıl Satarım?</h2>
-              </div>
-              <ProcessStepList steps={producerSteps} variant="producer" />
+            <div className="landing-hero__actions">
+              <a className="landing-hero__cta landing-hero__cta--primary" href="/urun-kesfet">
+                Hemen Alışverişe Başla
+              </a>
+              <a className="landing-hero__cta landing-hero__cta--ghost" href="/kayit-ol">
+                Üretici Olarak Katıl
+              </a>
             </div>
           </div>
         </section>
 
-        <section className="how-trust">
-          <div className="how-trust__inner">
-            <div className="how-trust__intro">
+        <section className="landing-process">
+          <div className="landing-process__inner">
+            <StepColumn
+              title="Nasıl Alırım?"
+              badge="Tüketiciler İçin"
+              variant="buyer"
+              steps={buyerSteps}
+            />
+
+            <div className="landing-process__divider" aria-hidden="true" />
+
+            <StepColumn
+              title="Nasıl Satarım?"
+              badge="Üreticiler İçin"
+              variant="producer"
+              steps={producerSteps}
+            />
+          </div>
+        </section>
+
+        <section className="landing-trust">
+          <div className="landing-trust__inner">
+            <div className="landing-trust__intro">
               <h2>Güven ve Doğrulama</h2>
               <p>
                 Tarladan Sat olarak, her aşamada kalite ve şeffaflığı garanti altına
                 alan bir denetim mekanizması işletiyoruz.
               </p>
             </div>
-            <div className="how-trust__grid">
+
+            <div className="landing-trust__grid">
               {trustFeatures.map((feature) => (
-                <article className="how-trust__card" key={feature.title}>
-                  <span className="material-symbols-outlined how-trust__card-icon">
+                <article className="landing-trust__card" key={feature.title}>
+                  <span className="material-symbols-outlined landing-trust__card-icon">
                     {feature.icon}
                   </span>
-                  <h4>{feature.title}</h4>
+                  <h3>{feature.title}</h3>
                   <p>{feature.description}</p>
                 </article>
               ))}
@@ -180,45 +197,40 @@ function HowItWorksPage() {
           </div>
         </section>
 
-        <section className="how-cta">
-          <div className="how-cta__inner">
-            <div className="how-cta__banner">
-              <div className="how-cta__copy">
-                <h2>Yerel Üretimin Gücüne Katılın</h2>
-                <p>
-                  İster taze ürün arayan bir aile olun, ister emeğini değerlendirmek
-                  isteyen bir üretici. Bugün başlayın.
-                </p>
-                <div className="how-cta__actions">
-                  <a className="how-cta__btn how-cta__btn--primary" href="/kayit-ol">
-                    Alıcı Olarak Kaydol
-                  </a>
-                  <a
-                    className="how-cta__btn how-cta__btn--outline"
-                    href="/kayit-ol"
-                  >
-                    Üretici Başvurusu Yap
-                  </a>
-                </div>
+        <section className="landing-cta">
+          <div className="landing-cta__banner">
+            <div className="landing-cta__copy">
+              <h2>Yerel Üretimin Gücüne Katılın</h2>
+              <p>
+                İster taze ürün arayan bir aile olun, ister emeğini değerlendirmek
+                isteyen bir üretici. Hemen bugün topluluğumuza dahil olun.
+              </p>
+
+              <div className="landing-cta__actions">
+                <a className="landing-cta__button landing-cta__button--primary" href="/kayit-ol">
+                  Alıcı Olarak Kaydol
+                </a>
+                <a className="landing-cta__button landing-cta__button--outline" href="/kayit-ol">
+                  Üretici Başvurusu Yap
+                </a>
               </div>
-              <div className="how-cta__image">
-                <img
-                  src={CTA_IMAGE}
-                  alt="Hasat sepeti tutan yerel üretici"
-                />
-              </div>
+            </div>
+
+            <div className="landing-cta__image">
+              <img src={CTA_IMAGE} alt="Hasat sepeti taşıyan üretici" />
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="how-footer">
-        <div className="how-footer__inner">
-          <div className="how-footer__brand">
-            <div className="how-footer__logo">Tarladan Sat</div>
+      <footer className="landing-footer">
+        <div className="landing-footer__inner">
+          <div className="landing-footer__brand">
+            <div className="landing-footer__logo">Tarladan Sat</div>
             <p>© 2024 Tarladan Sat. Anadolu&apos;nun bereketi, sofranızın lezzeti.</p>
           </div>
-          <div className="how-footer__links">
+
+          <div className="landing-footer__links">
             <a href="/nasil-calisir">Hakkımızda</a>
             <a href="/nasil-calisir">Sürdürülebilirlik</a>
             <a href="/kayit-ol">Üretici Ol</a>
@@ -228,7 +240,7 @@ function HowItWorksPage() {
         </div>
       </footer>
 
-      <nav className="how-mobile-nav" aria-label="Mobil menü">
+      <nav className="landing-mobile-nav" aria-label="Mobil menü">
         <a href="/urun-kesfet">
           <span className="material-symbols-outlined">search</span>
           <span>Keşfet</span>
@@ -237,17 +249,17 @@ function HowItWorksPage() {
           <span className="material-symbols-outlined">agriculture</span>
           <span>Üreticiler</span>
         </a>
-        <a className="how-mobile-nav__link--active" href="/nasil-calisir">
+        <a href="/nasil-calisir">
           <span className="material-symbols-outlined">help</span>
           <span>Nasıldır?</span>
         </a>
-        <a href="/urun-kesfet">
-          <span className="material-symbols-outlined">person</span>
-          <span>Profil</span>
+        <a href="/giris-yap">
+          <span className="material-symbols-outlined">login</span>
+          <span>Giriş</span>
         </a>
       </nav>
     </div>
   );
 }
 
-export default HowItWorksPage;
+export default PublicLandingPage;

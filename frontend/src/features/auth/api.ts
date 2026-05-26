@@ -1,4 +1,6 @@
 import type {
+  ForgotPasswordPayload,
+  ForgotPasswordResponse,
   LoginResponse,
   LoginPayload,
   RegisterPayload,
@@ -66,6 +68,31 @@ export async function loginRequest(
   return data;
 }
 
+export async function forgotPasswordRequest(
+  payload: ForgotPasswordPayload,
+): Promise<ForgotPasswordResponse> {
+  await csrfCookieRequest();
+
+  const response = await fetch(`${API_BASE_URL}/forgot-password`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") ?? "",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = (await response.json()) as ForgotPasswordResponse;
+
+  if (!response.ok) {
+    throw data;
+  }
+
+  return data;
+}
+
 export async function meRequest() {
   const response = await fetch(`${API_BASE_URL}/me`, {
     method: "GET",
@@ -88,4 +115,27 @@ export async function csrfCookieRequest() {
     method: "GET",
     credentials: "include",
   });
+}
+
+
+export async function logout(){
+  await csrfCookieRequest();
+
+  const response = await fetch(`${API_BASE_URL}/logout`,{
+    method:"POST",
+    credentials:"include",
+    headers:{
+      Accept:"application/json",
+      "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") ?? "",
+    }
+
+  })
+
+    const data = await response.json();
+    if (!response.ok) {
+    throw data;
+  }
+
+  return data;
+
 }

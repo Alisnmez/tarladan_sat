@@ -11,6 +11,11 @@ export type RegisterPayload = {
 export type LoginPayload = {
   email: string;
   password: string;
+  remember?: boolean;
+};
+
+export type ForgotPasswordPayload = {
+  email: string;
 };
 
 export type LoginResponse = {
@@ -22,6 +27,14 @@ export type LoginResponse = {
   errors?: {
     email?: string[];
     password?: string[];
+  };
+};
+
+export type ForgotPasswordResponse = {
+  success: boolean;
+  message: string;
+  errors?: {
+    email?: string[];
   };
 };
 

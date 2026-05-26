@@ -1,5 +1,3 @@
-import { getAuthSession } from "../../auth/authSession";
-import SiteNavbar from "../../layout/SiteNavbar";
 import "../HomePage.css";
 
 const HERO_IMAGE =
@@ -121,20 +119,8 @@ const trustStats = [
 ];
 
 function HomePage() {
-  const user = getAuthSession();
-  const displayName = user
-    ? `${user.first_name} ${user.last_name}`
-    : "Hesabım";
-
   return (
-    <div className="home">
-      <SiteNavbar
-        activePage="discover"
-        omitHomeLink
-        userAccountChip
-        userDisplayName={displayName}
-      />
-
+    <div className="home ui-page-shell">
       <main className="home-main">
         <section className="home-hero">
           <div className="home-hero__media" aria-hidden="true">
@@ -188,7 +174,7 @@ function HomePage() {
               <span className="home-featured__eyebrow">Sezonun En İyileri</span>
               <h2>Öne Çıkan Ürünler</h2>
             </div>
-            <a className="home-featured__more" href="#/discover">
+            <a className="home-featured__more" href="/urun-kesfet">
               Tümünü Gör
               <span className="material-symbols-outlined" aria-hidden="true">
                 arrow_forward
@@ -198,7 +184,7 @@ function HomePage() {
 
           <div className="home-featured__grid">
             {featuredProducts.map((product) => (
-              <article className="home-card" key={product.title}>
+              <article className="home-card ui-card ui-card--interactive" key={product.title}>
                 <div className="home-card__image">
                   <img src={product.image} alt={product.title} loading="lazy" />
                   <span
@@ -339,12 +325,12 @@ function HomePage() {
               Yerel üretimin gücünü dijital dünyanın imkanlarıyla birleştiriyoruz.
             </p>
             <div className="home-footer__social">
-              <a href="#/home" aria-label="Web sitesi">
+              <a href="/anasayfa" aria-label="Web sitesi">
                 <span className="material-symbols-outlined" aria-hidden="true">
                   public
                 </span>
               </a>
-              <a href="#/home" aria-label="E-posta">
+              <a href="/anasayfa" aria-label="E-posta">
                 <span className="material-symbols-outlined" aria-hidden="true">
                   alternate_email
                 </span>
@@ -356,13 +342,13 @@ function HomePage() {
             <h6>Kurumsal</h6>
             <ul>
               <li>
-                <a href="#/how-it-works">Hakkımızda</a>
+                <a href="/nasil-calisir">Hakkımızda</a>
               </li>
               <li>
-                <a href="#/how-it-works">Güven ve Doğrulama</a>
+                <a href="/nasil-calisir">Güven ve Doğrulama</a>
               </li>
               <li>
-                <a href="#/how-it-works">Blog</a>
+                <a href="/nasil-calisir">Blog</a>
               </li>
             </ul>
           </div>
@@ -371,13 +357,13 @@ function HomePage() {
             <h6>Yardım</h6>
             <ul>
               <li>
-                <a href="#/how-it-works">Kullanım Koşulları</a>
+                <a href="/nasil-calisir">Kullanım Koşulları</a>
               </li>
               <li>
-                <a href="#/how-it-works">KVKK</a>
+                <a href="/nasil-calisir">KVKK</a>
               </li>
               <li>
-                <a href="#/how-it-works">İletişim</a>
+                <a href="/nasil-calisir">İletişim</a>
               </li>
             </ul>
           </div>

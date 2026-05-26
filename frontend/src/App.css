@@ -991,6 +991,14 @@
   font-weight: 600;
 }
 
+.login-field__help-button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
 .login-field__help:hover {
   text-decoration: underline;
 }
@@ -1125,7 +1133,19 @@
   text-decoration: none;
 }
 
-.login-panel__footer a:hover {
+.login-panel__text-button {
+  margin-left: 6px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #154212;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.login-panel__footer a:hover,
+.login-panel__text-button:hover {
   text-decoration: underline;
 }
 

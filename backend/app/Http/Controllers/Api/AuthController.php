@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -55,14 +56,25 @@ class AuthController extends Controller
         $validated = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:6'],
+            'remember' => ['nullable', 'boolean'],
         ]);
 
-        if (!Auth::attempt($validated)) {
+        $credentials = [
+            'email' => $validated['email'],
+            'password' => $validated['password'],
+        ];
+
+        $remember = (bool) ($validated['remember'] ?? false);
+
+        if (!Auth::attempt($credentials, $remember)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Email veya şifre hatalı',
             ], 401);
         }
+
+        $request->session()->regenerate();
+
         $user = Auth::user();
 
         return response()->json([
@@ -76,11 +88,41 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-       return response()->json([
+        return response()->json([
             'success' => true,
             'data' => [
                 'user' => $request->user(),
             ],
+        ]);
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        Password::sendResetLink([
+            'email' => $validated['email'],
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Eğer bu e-posta adresi sistemde kayıtlıysa, şifre sıfırlama bağlantısı gönderildi.',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Çıkış yaptın!'
         ]);
     }
 }

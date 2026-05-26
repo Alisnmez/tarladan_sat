@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../../App.css";
-import AuthTopbar from "../components/AuthTopbar";
+import { ROUTES } from "../../../app/routes";
 import { registerRequest } from "../api";
 import type { RegisterResponse } from "../types";
 
@@ -69,7 +69,6 @@ function RegisterPage() {
 
   return (
     <div className="login-template">
-      <AuthTopbar />
       <main className="signup-screen">
       <section className="signup-visual">
         <div className="signup-visual__image" />
@@ -99,7 +98,7 @@ function RegisterPage() {
 
       <section className="signup-panel">
         <div className="signup-panel__inner">
-          <a href="#/login" className="signup-back-link">
+          <a href={ROUTES.login} className="signup-back-link">
             <span aria-hidden="true">←</span>
             Ana Sayfaya Dön
           </a>
@@ -269,7 +268,7 @@ function RegisterPage() {
 
             <p className="signup-switch">
               Zaten bir hesabın var mı?
-              <a href="#/login">Giriş Yap</a>
+              <a href={ROUTES.login}>Giriş Yap</a>
             </p>
           </form>
 
