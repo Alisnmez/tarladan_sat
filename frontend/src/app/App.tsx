@@ -16,7 +16,13 @@ import { getAuthSession, isAuthenticated } from "../features/auth/authSession";
 import { checkAuth } from "../features/auth/services/checkAuth";
 import SiteNavbar from "../features/layout/SiteNavbar";
 import type { NavPage } from "../features/layout/SiteNavbar";
-import { ROUTES, normalizePath, pathFromLegacyHash } from "./routes";
+import {
+  ROUTES,
+  buildLoginRedirectPath,
+  navigateTo,
+  normalizePath,
+  pathFromLegacyHash,
+} from "./routes";
 
 type AppPage =
   | "landing"
@@ -92,6 +98,21 @@ function getCurrentPage(): AppPage {
   return isAuthenticated() ? "home" : "landing";
 }
 
+function guardProtectedDetailRoutes() {
+  const path = normalizePath(window.location.pathname);
+
+  if (isAuthenticated()) {
+    return false;
+  }
+
+  if (path.startsWith("/urun/") || path.startsWith("/satici/")) {
+    navigateTo(buildLoginRedirectPath(path), true);
+    return true;
+  }
+
+  return false;
+}
+
 function App() {
   const [currentPage, setCurrentPage] = useState<AppPage>(getCurrentPage());
   const [authChecked, setAuthChecked] = useState(false);
@@ -106,6 +127,11 @@ function App() {
     async function bootstrapAuth() {
       await checkAuth();
 
+      if (guardProtectedDetailRoutes()) {
+        setAuthChecked(true);
+        return;
+      }
+
       setCurrentPage(getCurrentPage());
 
       setAuthChecked(true);
@@ -116,6 +142,11 @@ function App() {
 
   useEffect(() => {
     const handleRouteChange = () => {
+      if (guardProtectedDetailRoutes()) {
+        setCurrentPage("login");
+        return;
+      }
+
       setCurrentPage(getCurrentPage());
     };
 

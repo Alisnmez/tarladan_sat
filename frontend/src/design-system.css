@@ -40,6 +40,7 @@
   min-height: 100svh;
   background: var(--ts-surface-base);
   color: var(--ts-text-primary);
+  overflow-x: clip;
 }
 
 .ui-page-shell--column {

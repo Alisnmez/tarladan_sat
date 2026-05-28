@@ -1,3 +1,5 @@
+import { ROUTES } from "../../../app/routes";
+import { MobileBottomNav, SiteFooter } from "../../../shared/ui";
 import "../PublicLandingPage.css";
 
 const HERO_IMAGE =
@@ -223,41 +225,31 @@ function PublicLandingPage() {
         </section>
       </main>
 
-      <footer className="landing-footer">
-        <div className="landing-footer__inner">
-          <div className="landing-footer__brand">
-            <div className="landing-footer__logo">Tarladan Sat</div>
-            <p>© 2024 Tarladan Sat. Anadolu&apos;nun bereketi, sofranızın lezzeti.</p>
-          </div>
+      <SiteFooter
+        className="landing-footer"
+        brandDescription="© 2024 Tarladan Sat. Anadolu'nun bereketi, sofranızın lezzeti."
+        sections={[
+          {
+            title: "Platform",
+            links: [
+              { href: ROUTES.howItWorks, label: "Hakkımızda" },
+              { href: ROUTES.howItWorks, label: "Sürdürülebilirlik" },
+              { href: ROUTES.register, label: "Üretici Ol" },
+              { href: ROUTES.howItWorks, label: "İletişim" },
+              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
+            ],
+          },
+        ]}
+      />
 
-          <div className="landing-footer__links">
-            <a href="/nasil-calisir">Hakkımızda</a>
-            <a href="/nasil-calisir">Sürdürülebilirlik</a>
-            <a href="/kayit-ol">Üretici Ol</a>
-            <a href="/nasil-calisir">İletişim</a>
-            <a href="/nasil-calisir">Kullanım Koşulları</a>
-          </div>
-        </div>
-      </footer>
-
-      <nav className="landing-mobile-nav" aria-label="Mobil menü">
-        <a href="/urun-kesfet">
-          <span className="material-symbols-outlined">search</span>
-          <span>Keşfet</span>
-        </a>
-        <a href="/urun-kesfet">
-          <span className="material-symbols-outlined">agriculture</span>
-          <span>Üreticiler</span>
-        </a>
-        <a href="/nasil-calisir">
-          <span className="material-symbols-outlined">help</span>
-          <span>Nasıldır?</span>
-        </a>
-        <a href="/giris-yap">
-          <span className="material-symbols-outlined">login</span>
-          <span>Giriş</span>
-        </a>
-      </nav>
+      <MobileBottomNav
+        items={[
+          { href: ROUTES.discover, icon: "search", label: "Keşfet" },
+          { href: ROUTES.producers, icon: "agriculture", label: "Üreticiler" },
+          { href: ROUTES.howItWorks, icon: "help", label: "Nasıldır?" },
+          { href: ROUTES.login, icon: "login", label: "Giriş" },
+        ]}
+      />
     </div>
   );
 }

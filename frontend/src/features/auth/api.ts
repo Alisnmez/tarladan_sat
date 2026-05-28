@@ -23,11 +23,17 @@ function getCookie(name: string) {
 export async function registerRequest(
   payload: RegisterPayload,
 ): Promise<RegisterResponse> {
+  await csrfCookieRequest();
+
+  const xsrfToken = getCookie("XSRF-TOKEN");
+
   const response = await fetch(`${API_BASE_URL}/register`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
+      "X-XSRF-TOKEN": xsrfToken ?? "",
     },
     body: JSON.stringify(payload),
   });

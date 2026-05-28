@@ -1,4 +1,5 @@
 import { ROUTES } from "../../../app/routes";
+import { SiteFooter } from "../../../shared/ui";
 import "../ProductDetailPage.css";
 
 const galleryImages = [
@@ -226,44 +227,34 @@ function ProductDetailPage() {
         </section>
       </main>
 
-      <footer className="product-detail-footer ui-footer">
-        <div className="product-detail-footer__grid ui-footer__container">
-          <div className="product-detail-footer__brand">
-            <span>Tarladan Sat</span>
-            <p>
-              Yerel üreticileri doğrudan tüketicilerle buluşturan,
-              sürdürülebilir tarım destekçisi bir pazar yeri.
-            </p>
-          </div>
-
-          <div>
-            <h4>Hakkımızda</h4>
-            <a href={ROUTES.howItWorks}>Hikayemiz</a>
-            <a href={ROUTES.howItWorks}>Sertifikalarımız</a>
-            <a href={ROUTES.howItWorks}>Güven ve Doğrulama</a>
-          </div>
-
-          <div>
-            <h4>Destek</h4>
-            <a href={ROUTES.howItWorks}>Kullanım Koşulları</a>
-            <a href={ROUTES.howItWorks}>İletişim</a>
-            <a href={ROUTES.howItWorks}>Yardım Merkezi</a>
-          </div>
-
-          <div>
-            <h4>Bizi Takip Edin</h4>
-            <div className="product-detail-footer__socials">
-              <span className="material-symbols-outlined">social_leaderboard</span>
-              <span className="material-symbols-outlined">alternate_email</span>
-              <span className="material-symbols-outlined">eco</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="product-detail-footer__bottom ui-footer__bottom">
-          <p>© 2024 Tarladan Sat. Yerel Üretimin Gücü.</p>
-        </div>
-      </footer>
+      <SiteFooter
+        className="product-detail-footer"
+        brandDescription="Yerel üreticileri doğrudan tüketicilerle buluşturan, sürdürülebilir tarım destekçisi bir pazar yeri."
+        socialLinks={[
+          { href: ROUTES.home, label: "Topluluk", icon: "social_leaderboard" },
+          { href: ROUTES.home, label: "E-posta", icon: "alternate_email" },
+          { href: ROUTES.home, label: "Sürdürülebilirlik", icon: "eco" },
+        ]}
+        sections={[
+          {
+            title: "Hakkımızda",
+            links: [
+              { href: ROUTES.howItWorks, label: "Hikayemiz" },
+              { href: ROUTES.howItWorks, label: "Sertifikalarımız" },
+              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
+            ],
+          },
+          {
+            title: "Destek",
+            links: [
+              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
+              { href: ROUTES.howItWorks, label: "İletişim" },
+              { href: ROUTES.howItWorks, label: "Yardım Merkezi" },
+            ],
+          },
+        ]}
+        bottomText="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+      />
     </div>
   );
 }

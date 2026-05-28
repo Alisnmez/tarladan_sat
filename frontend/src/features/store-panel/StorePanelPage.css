@@ -15,9 +15,11 @@
 
 .store-panel-main {
   max-width: none;
+  min-width: 0;
 }
 
 .store-panel-content {
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -58,6 +60,8 @@
 .store-panel-cover__button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 8px;
   border: 0;
   border-radius: 999px;
@@ -117,6 +121,7 @@
 .store-panel-card__header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 24px;
   padding-bottom: 16px;
@@ -132,6 +137,7 @@
   font-size: 1.5rem;
   line-height: 1.3;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .store-panel-form {
@@ -263,22 +269,53 @@
   border-top: 1px solid rgba(194, 201, 187, 0.3);
 }
 
-.store-panel-footer__inner {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: space-between;
-  align-items: flex-start;
+.store-panel-actions > * {
+  width: 100%;
 }
 
-.store-panel-footer__inner p {
-  margin: 0;
+@media (max-width: 640px) {
+  .store-panel-main {
+    padding-bottom: 40px;
+  }
+
+  .store-panel-hero {
+    margin-bottom: 56px;
+  }
+
+  .store-panel-cover {
+    border-radius: 20px;
+  }
+
+  .store-panel-cover__button {
+    width: calc(100% - 32px);
+    padding: 12px 16px;
+    text-align: center;
+  }
+
+  .store-panel-grid,
+  .store-panel-side {
+    gap: 20px;
+  }
+
+  .store-panel-card {
+    padding: 24px;
+  }
+
+  .store-panel-socials__item {
+    grid-template-columns: 1fr;
+  }
+
+  .store-panel-socials__icon {
+    width: 44px;
+    height: 44px;
+  }
 }
 
-.store-panel-footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px 24px;
+@media (max-width: 560px) {
+  .store-panel-avatar {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 @media (min-width: 768px) {
@@ -298,31 +335,88 @@
 
   .store-panel-actions {
     flex-direction: row;
+    justify-content: flex-end;
   }
 
-  .store-panel-footer__inner {
-    flex-direction: row;
-    align-items: center;
+  .store-panel-actions > * {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .store-panel-content {
+    max-width: 840px;
+  }
+
+  .store-panel-cover {
+    height: 300px;
+  }
+
+  .store-panel-avatar {
+    left: 32px;
+    width: 144px;
+    height: 144px;
+  }
+
+  .store-panel-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .store-panel-side {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .store-panel-card {
+    padding: 28px;
+  }
+
+  .store-panel-actions > * {
+    flex: 1;
   }
 }
 
 @media (min-width: 1024px) {
   .store-panel-layout {
     display: grid;
-    grid-template-columns: 256px minmax(0, 1fr);
-    gap: 24px;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 32px;
     align-items: start;
   }
 
   .store-panel-sidebar {
     display: flex;
     position: sticky;
-    top: 92px;
+    top: 104px;
     flex-direction: column;
     gap: 16px;
-    min-height: calc(100vh - 92px);
-    padding: 16px;
+    min-height: auto;
+    padding: 20px;
+    border: 1px solid var(--ts-outline);
+    border-radius: 24px;
+    box-shadow: var(--ts-shadow-card-soft);
     background: var(--ts-surface-soft);
+  }
+
+  .store-panel-main {
+    padding-left: 0;
+    padding-right: var(--ts-page-x-desktop);
+  }
+
+  .store-panel-content {
+    max-width: none;
+  }
+
+  .store-panel-cover {
+    height: 340px;
+  }
+
+  .store-panel-avatar {
+    left: 40px;
+    bottom: -64px;
+    width: 152px;
+    height: 152px;
   }
 
   .store-panel-sidebar__profile {
@@ -374,8 +468,62 @@
     width: 100%;
   }
 
-  .store-panel-main {
-    padding-left: 0;
-    padding-right: 0;
+  .store-panel-grid {
+    grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.85fr);
+    gap: 28px;
+    align-items: start;
+  }
+
+  .store-panel-card {
+    padding: 30px;
+  }
+
+  .store-panel-side {
+    position: sticky;
+    top: 104px;
+  }
+
+  .store-panel-actions > * {
+    min-width: 200px;
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .store-panel-layout {
+    grid-template-columns: 296px minmax(0, 1fr);
+  }
+
+  .store-panel-grid {
+    grid-template-columns: minmax(0, 1.7fr) minmax(340px, 0.9fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .store-panel-cover {
+    height: 220px;
+  }
+
+  .store-panel-avatar {
+    bottom: -44px;
+    width: 104px;
+    height: 104px;
+  }
+
+  .store-panel-card {
+    padding: 20px;
+  }
+
+  .store-panel-avatar__button {
+    right: 8px;
+    bottom: 8px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .store-panel-actions {
+    gap: 12px;
+    padding-top: 24px;
+    margin-top: 24px;
   }
 }

@@ -1,3 +1,5 @@
+import { ROUTES } from "../../../app/routes";
+import { InputShell, SiteFooter } from "../../../shared/ui";
 import "../HomePage.css";
 
 const HERO_IMAGE =
@@ -137,31 +139,22 @@ function HomePage() {
           </div>
 
           <form className="home-search" onSubmit={(e) => e.preventDefault()}>
-            <div className="home-search__field">
-              <span className="material-symbols-outlined" aria-hidden="true">
-                search
-              </span>
+            <InputShell className="home-search__field" icon="search">
               <input
                 type="text"
                 placeholder="Ne aramıştınız? (Domates, Zeytinyağı...)"
               />
-            </div>
-            <div className="home-search__field">
-              <span className="material-symbols-outlined" aria-hidden="true">
-                location_on
-              </span>
+            </InputShell>
+            <InputShell className="home-search__field" icon="location_on">
               <input type="text" placeholder="Şehir veya ilçe seçin" />
-            </div>
-            <div className="home-search__field">
-              <span className="material-symbols-outlined" aria-hidden="true">
-                store
-              </span>
+            </InputShell>
+            <InputShell className="home-search__field" icon="store">
               <select defaultValue="all">
                 <option value="all">Tüm Satış Tipleri</option>
                 <option value="wholesale">Toptan</option>
                 <option value="retail">Perakende</option>
               </select>
-            </div>
+            </InputShell>
             <button className="home-search__submit" type="submit">
               Ara
             </button>
@@ -174,7 +167,7 @@ function HomePage() {
               <span className="home-featured__eyebrow">Sezonun En İyileri</span>
               <h2>Öne Çıkan Ürünler</h2>
             </div>
-            <a className="home-featured__more" href="/urun-kesfet">
+            <a className="home-featured__more" href={ROUTES.discover}>
               Tümünü Gör
               <span className="material-symbols-outlined" aria-hidden="true">
                 arrow_forward
@@ -317,76 +310,41 @@ function HomePage() {
         </section>
       </main>
 
-      <footer className="home-footer">
-        <div className="home-footer__grid">
-          <div className="home-footer__brand-col">
-            <div className="home-footer__brand">Tarladan Sat</div>
-            <p>
-              Yerel üretimin gücünü dijital dünyanın imkanlarıyla birleştiriyoruz.
-            </p>
-            <div className="home-footer__social">
-              <a href="/anasayfa" aria-label="Web sitesi">
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  public
-                </span>
-              </a>
-              <a href="/anasayfa" aria-label="E-posta">
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  alternate_email
-                </span>
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h6>Kurumsal</h6>
-            <ul>
-              <li>
-                <a href="/nasil-calisir">Hakkımızda</a>
-              </li>
-              <li>
-                <a href="/nasil-calisir">Güven ve Doğrulama</a>
-              </li>
-              <li>
-                <a href="/nasil-calisir">Blog</a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h6>Yardım</h6>
-            <ul>
-              <li>
-                <a href="/nasil-calisir">Kullanım Koşulları</a>
-              </li>
-              <li>
-                <a href="/nasil-calisir">KVKK</a>
-              </li>
-              <li>
-                <a href="/nasil-calisir">İletişim</a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h6>Bülten</h6>
-            <p className="home-footer__newsletter-note">
-              Yeni hasat dönemlerinden ve özel indirimlerden haberdar olun.
-            </p>
-            <form
-              className="home-footer__newsletter"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input type="email" placeholder="E-posta adresi" />
-              <button type="submit">Katıl</button>
-            </form>
-          </div>
-        </div>
-
-        <div className="home-footer__bottom">
-          <p>© 2024 Tarladan Sat. Yerel Üretimin Gücü.</p>
-        </div>
-      </footer>
+      <SiteFooter
+        className="home-footer"
+        brandDescription="Yerel üretimin gücünü dijital dünyanın imkanlarıyla birleştiriyoruz."
+        socialLinks={[
+          { href: ROUTES.home, label: "Web sitesi", icon: "public" },
+          { href: ROUTES.home, label: "E-posta", icon: "alternate_email" },
+        ]}
+        sections={[
+          {
+            title: "Kurumsal",
+            links: [
+              { href: ROUTES.howItWorks, label: "Hakkımızda" },
+              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
+              { href: ROUTES.howItWorks, label: "Blog" },
+            ],
+          },
+          {
+            title: "Yardım",
+            links: [
+              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
+              { href: ROUTES.howItWorks, label: "KVKK" },
+              { href: ROUTES.howItWorks, label: "İletişim" },
+            ],
+          },
+          {
+            title: "Bülten",
+            description: "Yeni hasat dönemlerinden ve özel indirimlerden haberdar olun.",
+            newsletter: {
+              placeholder: "E-posta adresi",
+              buttonLabel: "Katıl",
+            },
+          },
+        ]}
+        bottomText="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+      />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { ROUTES } from "../../../app/routes";
+import { FormField, SiteFooter } from "../../../shared/ui";
 import "../SettingsPage.css";
 
 function SettingsPage() {
@@ -30,16 +32,13 @@ function SettingsPage() {
           <section className="settings-card settings-card--form ui-card">
             <h2>Kişisel Bilgiler</h2>
             <form className="settings-form">
-              <label>
-                <span>Ad Soyad</span>
+              <FormField label="Ad Soyad">
                 <input type="text" defaultValue="Ahmet Yılmaz" />
-              </label>
-              <label>
-                <span>Telefon</span>
+              </FormField>
+              <FormField label="Telefon">
                 <input type="tel" defaultValue="+90 532 123 45 67" />
-              </label>
-              <label className="settings-form__full">
-                <span>Şehir</span>
+              </FormField>
+              <FormField label="Şehir" fullWidth className="settings-form__full">
                 <select defaultValue="Muğla">
                   <option>İstanbul</option>
                   <option>Ankara</option>
@@ -48,7 +47,7 @@ function SettingsPage() {
                   <option>Antalya</option>
                   <option>Muğla</option>
                 </select>
-              </label>
+              </FormField>
             </form>
           </section>
 
@@ -81,23 +80,23 @@ function SettingsPage() {
         </div>
       </main>
 
-      <footer className="settings-footer ui-footer">
-        <div className="settings-footer__inner ui-footer__container">
-          <div className="settings-footer__brand">
-            <span>Tarladan Sat</span>
-            <p>© 2024 Tarladan Sat. Supporting local agriculture through digital transparency.</p>
-          </div>
-
-          <div className="settings-footer__links">
-            <a href="/nasil-calisir">Our Mission</a>
-            <a href="/ureticiler">Farmer Stories</a>
-            <a href="/nasil-calisir">Sustainability</a>
-            <a href="/nasil-calisir">Shipping Policy</a>
-            <a href="/nasil-calisir">Contact Support</a>
-            <a href="/nasil-calisir">Terms of Service</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter
+        className="settings-footer"
+        brandDescription="© 2024 Tarladan Sat. Supporting local agriculture through digital transparency."
+        sections={[
+          {
+            title: "Bağlantılar",
+            links: [
+              { href: ROUTES.howItWorks, label: "Our Mission" },
+              { href: ROUTES.producers, label: "Farmer Stories" },
+              { href: ROUTES.howItWorks, label: "Sustainability" },
+              { href: ROUTES.howItWorks, label: "Shipping Policy" },
+              { href: ROUTES.howItWorks, label: "Contact Support" },
+              { href: ROUTES.howItWorks, label: "Terms of Service" },
+            ],
+          },
+        ]}
+      />
     </div>
   );
 }

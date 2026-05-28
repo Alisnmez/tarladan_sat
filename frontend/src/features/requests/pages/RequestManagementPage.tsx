@@ -1,3 +1,5 @@
+import { ROUTES } from "../../../app/routes";
+import { SiteFooter } from "../../../shared/ui";
 import "../RequestManagementPage.css";
 
 type RequestCard = {
@@ -171,36 +173,35 @@ function RequestManagementPage() {
         </section>
       </main>
 
-      <footer className="requests-footer ui-footer">
-        <div className="requests-footer__grid ui-footer__container">
-          <div className="requests-footer__brand">
-            <div>Tarladan Sat</div>
-            <p>Yerel üretimin gücünü dijital dünyanın hızıyla birleştiriyoruz.</p>
-          </div>
-          <div>
-            <h4>Platform</h4>
-            <a href="/nasil-calisir">Hakkımızda</a>
-            <a href="/nasil-calisir">Güven ve Doğrulama</a>
-          </div>
-          <div>
-            <h4>Yardım</h4>
-            <a href="/nasil-calisir">İletişim</a>
-            <a href="/nasil-calisir">Kullanım Koşulları</a>
-          </div>
-          <div>
-            <h4>Bülten</h4>
-            <p>Yeni taleplerden haberdar olun.</p>
-            <div className="requests-footer__newsletter">
-              <input type="email" placeholder="E-posta adresi" />
-              <button type="button">Katıl</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="requests-footer__bottom ui-footer__bottom">
-          <p>© 2024 Tarladan Sat. Yerel Üretimin Gücü.</p>
-        </div>
-      </footer>
+      <SiteFooter
+        className="requests-footer"
+        brandDescription="Yerel üretimin gücünü dijital dünyanın hızıyla birleştiriyoruz."
+        sections={[
+          {
+            title: "Platform",
+            links: [
+              { href: ROUTES.howItWorks, label: "Hakkımızda" },
+              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
+            ],
+          },
+          {
+            title: "Yardım",
+            links: [
+              { href: ROUTES.howItWorks, label: "İletişim" },
+              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
+            ],
+          },
+          {
+            title: "Bülten",
+            description: "Yeni taleplerden haberdar olun.",
+            newsletter: {
+              placeholder: "E-posta adresi",
+              buttonLabel: "Katıl",
+            },
+          },
+        ]}
+        bottomText="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+      />
     </div>
   );
 }

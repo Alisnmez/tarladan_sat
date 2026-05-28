@@ -1,4 +1,5 @@
 import { ROUTES } from "../../../app/routes";
+import { SiteFooter } from "../../../shared/ui";
 import "../ProductsPage.css";
 
 type Product = {
@@ -189,51 +190,40 @@ function ProductsPage() {
         </div>
       </main>
 
-      <footer className="discover-footer ui-footer">
-        <div className="discover-footer__grid ui-footer__container">
-          <div className="discover-footer__brand">
-            <div>Tarladan Sat</div>
-            <p>
-              Yerel üreticileri destekleyerek daha sağlıklı bir gelecek inşa
-              ediyoruz. Topraktan sofranıza en kısa yol.
-            </p>
-          </div>
-
-          <div>
-            <h4>Kurumsal</h4>
-            <a href={ROUTES.howItWorks}>Hakkımızda</a>
-            <a href={ROUTES.howItWorks}>Güven ve Doğrulama</a>
-            <a href={ROUTES.howItWorks}>Kullanım Koşulları</a>
-          </div>
-
-          <div>
-            <h4>Topluluk</h4>
-            <a href={ROUTES.register}>Üretici Ol</a>
-            <a href={ROUTES.discover}>Başarı Hikayeleri</a>
-            <a href={ROUTES.howItWorks}>Sıkça Sorulan Sorular</a>
-          </div>
-
-          <div>
-            <h4>İletişim</h4>
-            <a href={ROUTES.discover}>
-              <span className="material-symbols-outlined">mail</span>
-              destek@tarladansat.com
-            </a>
-            <a href={ROUTES.discover}>
-              <span className="material-symbols-outlined">call</span>
-              0850 123 45 67
-            </a>
-          </div>
-        </div>
-
-        <div className="discover-footer__bottom ui-footer__bottom">
-          <span>© 2024 Tarladan Sat. Yerel Üretimin Gücü.</span>
-          <div>
-            <span className="material-symbols-outlined">language</span>
-            <span className="material-symbols-outlined">share</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter
+        className="discover-footer"
+        brandDescription="Yerel üreticileri destekleyerek daha sağlıklı bir gelecek inşa ediyoruz. Topraktan sofranıza en kısa yol."
+        socialLinks={[
+          { href: ROUTES.home, label: "Dil", icon: "language" },
+          { href: ROUTES.home, label: "Paylaş", icon: "share" },
+        ]}
+        sections={[
+          {
+            title: "Kurumsal",
+            links: [
+              { href: ROUTES.howItWorks, label: "Hakkımızda" },
+              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
+              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
+            ],
+          },
+          {
+            title: "Topluluk",
+            links: [
+              { href: ROUTES.register, label: "Üretici Ol" },
+              { href: ROUTES.discover, label: "Başarı Hikayeleri" },
+              { href: ROUTES.howItWorks, label: "Sıkça Sorulan Sorular" },
+            ],
+          },
+          {
+            title: "İletişim",
+            links: [
+              { href: ROUTES.discover, label: "destek@tarladansat.com" },
+              { href: ROUTES.discover, label: "0850 123 45 67" },
+            ],
+          },
+        ]}
+        bottomText="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+      />
     </div>
   );
 }

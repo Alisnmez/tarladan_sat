@@ -1,4 +1,5 @@
 import { ROUTES } from "../../../app/routes";
+import { FormField, FormSection, InputShell, SiteFooter } from "../../../shared/ui";
 import "../StorePanelPage.css";
 
 function StorePanelPage() {
@@ -70,48 +71,33 @@ function StorePanelPage() {
             </section>
 
             <div className="store-panel-grid">
-              <section className="store-panel-card ui-card">
-                <div className="store-panel-card__header">
-                  <span className="material-symbols-outlined">storefront</span>
-                  <h3>Magaza Bilgileri</h3>
-                </div>
-
+              <FormSection title="Magaza Bilgileri" icon="storefront" className="store-panel-card ui-card">
                 <div className="store-panel-form">
-                  <label>
-                    <span>Magaza Adi</span>
+                  <FormField label="Magaza Adi">
                     <input type="text" defaultValue="Mehmet Yilmaz Ciftligi" />
-                  </label>
+                  </FormField>
 
-                  <label>
-                    <span>Konum / Sehir</span>
-                    <div className="store-panel-input-icon">
-                      <span className="material-symbols-outlined">location_on</span>
+                  <FormField label="Konum / Sehir">
+                    <InputShell className="store-panel-input-icon" icon="location_on">
                       <input type="text" defaultValue="Efes, Selcuk, Izmir" />
-                    </div>
-                  </label>
+                    </InputShell>
+                  </FormField>
 
-                  <label>
-                    <span>Magaza Aciklamasi (Hakkimizda)</span>
+                  <FormField label="Magaza Aciklamasi (Hakkimizda)">
                     <textarea
                       rows={6}
                       defaultValue="Biz 3 kusaktir Izmir'in verimli topraklarinda organik tarim yapan bir aileyiz. Hicbir kimyasal kullanmadan yetistirdigimiz urunlerimizi dogrudan sofraniza ulastiriyoruz. Bahcemizden taze toplanan zeytin, incir ve mevsim sebzeleri ile doganin tadini sunuyoruz."
                     />
-                  </label>
+                  </FormField>
                 </div>
-              </section>
+              </FormSection>
 
               <div className="store-panel-side">
-                <section className="store-panel-card ui-card">
-                  <div className="store-panel-card__header">
-                    <span className="material-symbols-outlined">contact_page</span>
-                    <h3>Iletisim</h3>
-                  </div>
-
+                <FormSection title="Iletisim" icon="contact_page" className="store-panel-card ui-card">
                   <div className="store-panel-form">
-                    <label>
-                      <span>Telefon Numarasi</span>
+                    <FormField label="Telefon Numarasi">
                       <input type="tel" defaultValue="+90 532 000 00 00" />
-                    </label>
+                    </FormField>
 
                     <div className="store-panel-socials">
                       <p>Sosyal Medya</p>
@@ -127,7 +113,7 @@ function StorePanelPage() {
                       </label>
                     </div>
                   </div>
-                </section>
+                </FormSection>
 
                 <section className="store-panel-verified ui-card">
                   <span className="material-symbols-outlined">verified_user</span>
@@ -149,20 +135,20 @@ function StorePanelPage() {
         </main>
       </div>
 
-      <footer className="store-panel-footer ui-footer">
-        <div className="store-panel-footer__inner ui-footer__container">
-          <div>
-            <span className="ui-footer__brand-title">Tarladan Sat</span>
-            <p>© 2024 Tarladan Sat - Yerel Ureticiyi Destekliyoruz</p>
-          </div>
-
-          <div className="store-panel-footer__links">
-            <a href={ROUTES.howItWorks}>Kullanim Kosullari</a>
-            <a href={ROUTES.howItWorks}>Gizlilik Politikasi</a>
-            <a href={ROUTES.howItWorks}>Satici Rehberi</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter
+        className="store-panel-footer"
+        brandDescription="© 2024 Tarladan Sat - Yerel Ureticiyi Destekliyoruz"
+        sections={[
+          {
+            title: "Panel",
+            links: [
+              { href: ROUTES.howItWorks, label: "Kullanim Kosullari" },
+              { href: ROUTES.howItWorks, label: "Gizlilik Politikasi" },
+              { href: ROUTES.howItWorks, label: "Satici Rehberi" },
+            ],
+          },
+        ]}
+      />
     </div>
   );
 }

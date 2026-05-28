@@ -1,4 +1,5 @@
 import { ROUTES } from "../../../app/routes";
+import { SiteFooter } from "../../../shared/ui";
 import "../ProducerDetailPage.css";
 
 const producerProducts = [
@@ -161,37 +162,34 @@ function ProducerDetailPage() {
         </div>
       </main>
 
-      <footer className="producer-detail-footer ui-footer">
-        <div className="producer-detail-footer__grid ui-footer__container">
-          <div>
-            <span className="ui-footer__brand-title">Tarladan Sat</span>
-            <p>Yerel uretimin gucunu dijital dunyaya tasiyoruz. Dogrudan ureticiden, taptaze sofraniza.</p>
-          </div>
-          <div>
-            <h5>Hakkimizda</h5>
-            <a href={ROUTES.howItWorks}>Hikayemiz</a>
-            <a href={ROUTES.howItWorks}>Guven ve Dogrulama</a>
-            <a href={ROUTES.howItWorks}>Surdurulebilirlik</a>
-          </div>
-          <div>
-            <h5>Yardim</h5>
-            <a href={ROUTES.howItWorks}>Kullanim Kosullari</a>
-            <a href={ROUTES.howItWorks}>Iletisim</a>
-            <a href={ROUTES.howItWorks}>Sikca Sorulan Sorular</a>
-          </div>
-          <div>
-            <h5>Bizi Takip Edin</h5>
-            <div className="producer-detail-footer__socials">
-              <span className="material-symbols-outlined">language</span>
-              <span className="material-symbols-outlined">park</span>
-              <span className="material-symbols-outlined">group</span>
-            </div>
-          </div>
-        </div>
-        <div className="producer-detail-footer__bottom ui-footer__bottom">
-          <p>© 2024 Tarladan Sat. Yerel Uretimin Gucu.</p>
-        </div>
-      </footer>
+      <SiteFooter
+        className="producer-detail-footer"
+        brandDescription="Yerel uretimin gucunu dijital dunyaya tasiyoruz. Dogrudan ureticiden, taptaze sofraniza."
+        socialLinks={[
+          { href: ROUTES.home, label: "Web", icon: "language" },
+          { href: ROUTES.home, label: "Dogal Yasam", icon: "park" },
+          { href: ROUTES.home, label: "Topluluk", icon: "group" },
+        ]}
+        sections={[
+          {
+            title: "Hakkimizda",
+            links: [
+              { href: ROUTES.howItWorks, label: "Hikayemiz" },
+              { href: ROUTES.howItWorks, label: "Guven ve Dogrulama" },
+              { href: ROUTES.howItWorks, label: "Surdurulebilirlik" },
+            ],
+          },
+          {
+            title: "Yardim",
+            links: [
+              { href: ROUTES.howItWorks, label: "Kullanim Kosullari" },
+              { href: ROUTES.howItWorks, label: "Iletisim" },
+              { href: ROUTES.howItWorks, label: "Sikca Sorulan Sorular" },
+            ],
+          },
+        ]}
+        bottomText="© 2024 Tarladan Sat. Yerel Uretimin Gucu."
+      />
     </div>
   );
 }

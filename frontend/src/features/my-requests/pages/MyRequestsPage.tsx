@@ -1,3 +1,5 @@
+import { ROUTES } from "../../../app/routes";
+import { InputShell, MobileBottomNav, SiteFooter } from "../../../shared/ui";
 import "../MyRequestsPage.css";
 
 type BuyerRequest = {
@@ -63,8 +65,9 @@ function MyRequestsPage() {
           </div>
 
           <label className="my-requests-search">
-            <span className="material-symbols-outlined">search</span>
-            <input type="text" placeholder="Talep ara..." />
+            <InputShell icon="search">
+              <input type="text" placeholder="Talep ara..." />
+            </InputShell>
           </label>
         </div>
 
@@ -177,48 +180,42 @@ function MyRequestsPage() {
         </div>
       </main>
 
-      <footer className="my-requests-footer ui-footer">
-        <div className="my-requests-footer__grid ui-footer__container">
-          <div>
-            <div className="my-requests-footer__brand">Tarladan Sat</div>
-            <p>© 2024 Tarladan Sat. Yerel Üretimin Gücü.</p>
-          </div>
-          <div>
-            <h4>Kurumsal</h4>
-            <a href="/nasil-calisir">Hakkımızda</a>
-            <a href="/nasil-calisir">Güven ve Doğrulama</a>
-          </div>
-          <div>
-            <h4>Yasal</h4>
-            <a href="/nasil-calisir">Kullanım Koşulları</a>
-            <a href="/nasil-calisir">Gizlilik Politikası</a>
-          </div>
-          <div>
-            <h4>Destek</h4>
-            <a href="/nasil-calisir">İletişim</a>
-            <a href="/nasil-calisir">Sıkça Sorulan Sorular</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter
+        className="my-requests-footer"
+        brandDescription="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+        sections={[
+          {
+            title: "Kurumsal",
+            links: [
+              { href: ROUTES.howItWorks, label: "Hakkımızda" },
+              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
+            ],
+          },
+          {
+            title: "Yasal",
+            links: [
+              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
+              { href: ROUTES.howItWorks, label: "Gizlilik Politikası" },
+            ],
+          },
+          {
+            title: "Destek",
+            links: [
+              { href: ROUTES.howItWorks, label: "İletişim" },
+              { href: ROUTES.howItWorks, label: "Sıkça Sorulan Sorular" },
+            ],
+          },
+        ]}
+      />
 
-      <nav className="my-requests-mobile-nav" aria-label="Mobil alt menü">
-        <a href="/urun-kesfet">
-          <span className="material-symbols-outlined">explore</span>
-          <span>Keşfet</span>
-        </a>
-        <a className="my-requests-mobile-nav__active" href="/taleplerim">
-          <span className="material-symbols-outlined">assignment</span>
-          <span>Taleplerim</span>
-        </a>
-        <a href="/taleplerim">
-          <span className="material-symbols-outlined">chat</span>
-          <span>Mesajlar</span>
-        </a>
-        <a href="/anasayfa">
-          <span className="material-symbols-outlined">person</span>
-          <span>Profil</span>
-        </a>
-      </nav>
+      <MobileBottomNav
+        items={[
+          { href: ROUTES.discover, icon: "explore", label: "Keşfet" },
+          { href: ROUTES.myRequests, icon: "assignment", label: "Taleplerim", active: true },
+          { href: ROUTES.myRequests, icon: "chat", label: "Mesajlar" },
+          { href: ROUTES.home, icon: "person", label: "Profil" },
+        ]}
+      />
     </div>
   );
 }

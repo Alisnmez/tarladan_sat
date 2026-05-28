@@ -1,10 +1,10 @@
 .my-requests-shell {
   display: flex;
   flex-direction: column;
+  padding-bottom: 84px;
 }
 
-.my-requests-main,
-.my-requests-footer__grid {
+.my-requests-main {
   margin: 0 auto;
 }
 
@@ -21,26 +21,8 @@
 }
 
 .my-requests-search {
-  position: relative;
   width: 100%;
   max-width: 256px;
-}
-
-.my-requests-search span {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #72796e;
-}
-
-.my-requests-search input {
-  width: 100%;
-  border: 0;
-  border-radius: 16px;
-  background: #f6f3f2;
-  padding: 12px 16px 12px 40px;
-  font: inherit;
 }
 
 .my-requests-layout {
@@ -292,70 +274,6 @@
   background: #f0eded;
 }
 
-.my-requests-footer__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  padding: 48px 16px;
-}
-
-.my-requests-footer__brand {
-  margin-bottom: 16px;
-  color: #154212;
-  font-size: 1.5rem;
-  line-height: 1.3;
-  font-weight: 800;
-}
-
-.my-requests-footer p,
-.my-requests-footer a {
-  margin: 0;
-  color: #42493e;
-}
-
-.my-requests-footer h4 {
-  margin: 0 0 16px;
-  color: #1b1b1b;
-  font-size: 0.95rem;
-  line-height: 1.3;
-  font-weight: 700;
-}
-
-.my-requests-footer a {
-  display: block;
-  margin-bottom: 10px;
-  text-decoration: none;
-}
-
-.my-requests-mobile-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 45;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid #c2c9bb;
-  background: #fcf9f8;
-  padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
-}
-
-.my-requests-mobile-nav a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: #42493e;
-  text-decoration: none;
-  font-size: 10px;
-  line-height: 14px;
-  font-weight: 600;
-}
-
-.my-requests-mobile-nav__active {
-  color: #154212 !important;
-}
-
 @keyframes pulse-dot {
   0%,
   100% {
@@ -369,20 +287,14 @@
 }
 
 @media (min-width: 768px) {
-  .my-requests-main,
-  .my-requests-footer__grid {
-    padding-left: 48px;
-    padding-right: 48px;
+  .my-requests-shell {
+    padding-bottom: 0;
   }
 
   .my-requests-header {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-  }
-
-  .my-requests-footer__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -418,11 +330,5 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-  }
-}
-
-@media (min-width: 768px) {
-  .my-requests-mobile-nav {
-    display: none;
   }
 }

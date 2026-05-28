@@ -63,3 +63,19 @@ export function navigateTo(path: string, replace = false) {
   window.history[method]({}, "", path);
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
+
+export function buildLoginRedirectPath(targetPath: string) {
+  const safeTarget = normalizePath(targetPath);
+  return `${ROUTES.login}?redirect=${encodeURIComponent(safeTarget)}`;
+}
+
+export function getRedirectTargetFromLocation() {
+  const params = new URLSearchParams(window.location.search);
+  const redirect = params.get("redirect");
+
+  if (!redirect || !redirect.startsWith("/")) {
+    return null;
+  }
+
+  return normalizePath(redirect);
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../../App.css";
-import { ROUTES, navigateTo } from "../../../app/routes";
+import { ROUTES, getRedirectTargetFromLocation, navigateTo } from "../../../app/routes";
 import { setAuthSession } from "../authSession";
 import { forgotPasswordRequest, loginRequest, meRequest } from "../api";
 import type { ForgotPasswordResponse, LoginResponse } from "../types";
@@ -45,7 +45,7 @@ function LoginPage() {
         }
       }
 
-      navigateTo(ROUTES.home);
+      navigateTo(getRedirectTargetFromLocation() ?? ROUTES.home);
     } catch (err) {
       const apiError = err as LoginResponse;
 

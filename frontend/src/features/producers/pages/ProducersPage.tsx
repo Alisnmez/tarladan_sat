@@ -1,4 +1,5 @@
 import { ROUTES } from "../../../app/routes";
+import { InputShell, SiteFooter } from "../../../shared/ui";
 import "../ProducersPage.css";
 
 type Producer = {
@@ -90,53 +91,54 @@ function ProducersPage() {
           </div>
 
           <label className="producers-toolbar__search">
-            <span className="material-symbols-outlined">search</span>
-            <input
-              type="text"
-              placeholder="Üretici veya çiftlik adı ile ara..."
-            />
+            <InputShell icon="search">
+              <input
+                type="text"
+                placeholder="Üretici veya çiftlik adı ile ara..."
+              />
+            </InputShell>
           </label>
         </section>
 
         <section className="producers-grid">
           {producers.map((producer) => (
             <article className="producer-card ui-card ui-card--interactive" key={producer.title}>
-              <div className="producer-card__media">
-                <img src={producer.image} alt={producer.title} loading="lazy" />
-                <span className="producer-card__badge">
-                  <span className="material-symbols-outlined">verified</span>
-                  Doğrulanmış
-                </span>
-              </div>
+              <a href={ROUTES.producerDetail} className="producer-card__link">
+                <div className="producer-card__media">
+                  <img src={producer.image} alt={producer.title} loading="lazy" />
+                  <span className="producer-card__badge">
+                    <span className="material-symbols-outlined">verified</span>
+                    Doğrulanmış
+                  </span>
+                </div>
 
-              <div className="producer-card__body">
-                <div className="producer-card__header">
-                  <div>
-                    <h2>{producer.title}</h2>
-                    <div className="producer-card__location">
-                      <span className="material-symbols-outlined">location_on</span>
-                      <span>{producer.location}</span>
+                <div className="producer-card__body">
+                  <div className="producer-card__header">
+                    <div>
+                      <h2>{producer.title}</h2>
+                      <div className="producer-card__location">
+                        <span className="material-symbols-outlined">location_on</span>
+                        <span>{producer.location}</span>
+                      </div>
+                    </div>
+
+                    <div className="producer-card__rating">
+                      <span className="material-symbols-outlined">star</span>
+                      <span>{producer.rating}</span>
                     </div>
                   </div>
 
-                  <div className="producer-card__rating">
-                    <span className="material-symbols-outlined">star</span>
-                    <span>{producer.rating}</span>
+                  <p className="producer-card__description">{producer.description}</p>
+
+                  <div className="producer-card__tags">
+                    {producer.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
                   </div>
+
+                  <span className="producer-card__button">Profili Gör</span>
                 </div>
-
-                <p className="producer-card__description">{producer.description}</p>
-
-                <div className="producer-card__tags">
-                  {producer.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-
-                <a href={ROUTES.producerDetail} className="producer-card__button">
-                  Profili Gör
-                </a>
-              </div>
+              </a>
             </article>
           ))}
         </section>
@@ -164,59 +166,41 @@ function ProducersPage() {
         </section>
       </main>
 
-      <footer className="producers-footer ui-footer">
-        <div className="producers-footer__grid ui-footer__container">
-          <div className="producers-footer__brand">
-            <span>Tarladan Sat</span>
-            <p>
-              Doğrudan üreticiden, en taze ve en doğal ürünleri kapınıza getiren
-              güvenilir pazar yeriniz. Yerel tarımı birlikte destekleyelim.
-            </p>
-            <div className="producers-footer__socials">
-              <a href="/anasayfa" aria-label="Web sitesi">
-                <span className="material-symbols-outlined">public</span>
-              </a>
-              <a href="/anasayfa" aria-label="E-posta">
-                <span className="material-symbols-outlined">mail</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="producers-footer__links">
-            <div>
-              <h4>Platform</h4>
-              <a href="/nasil-calisir">Misyonumuz</a>
-              <a href="/ureticiler">Çiftçi Hikayeleri</a>
-              <a href="/nasil-calisir">Sürdürülebilirlik</a>
-            </div>
-
-            <div>
-              <h4>Yardım</h4>
-              <a href="/nasil-calisir">Teslimat Politikası</a>
-              <a href="/nasil-calisir">Destek</a>
-              <a href="/nasil-calisir">Kullanım Koşulları</a>
-            </div>
-
-            <div>
-              <h4>Bülten</h4>
-              <p>Hasat haberlerinden ilk siz haberdar olun.</p>
-              <div className="producers-footer__newsletter">
-                <input type="email" placeholder="E-posta adresi" />
-                <button type="button" aria-label="Gönder">
-                  <span className="material-symbols-outlined">send</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="producers-footer__bottom ui-footer__bottom">
-          <p>
-            © 2024 Tarladan Sat. Supporting local agriculture through digital
-            transparency.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter
+        className="producers-footer"
+        brandDescription="Doğrudan üreticiden, en taze ve en doğal ürünleri kapınıza getiren güvenilir pazar yeriniz. Yerel tarımı birlikte destekleyelim."
+        socialLinks={[
+          { href: ROUTES.home, label: "Web sitesi", icon: "public" },
+          { href: ROUTES.home, label: "E-posta", icon: "mail" },
+        ]}
+        sections={[
+          {
+            title: "Platform",
+            links: [
+              { href: ROUTES.howItWorks, label: "Misyonumuz" },
+              { href: ROUTES.producers, label: "Çiftçi Hikayeleri" },
+              { href: ROUTES.howItWorks, label: "Sürdürülebilirlik" },
+            ],
+          },
+          {
+            title: "Yardım",
+            links: [
+              { href: ROUTES.howItWorks, label: "Teslimat Politikası" },
+              { href: ROUTES.howItWorks, label: "Destek" },
+              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
+            ],
+          },
+          {
+            title: "Bülten",
+            description: "Hasat haberlerinden ilk siz haberdar olun.",
+            newsletter: {
+              placeholder: "E-posta adresi",
+              buttonIcon: "send",
+            },
+          },
+        ]}
+        bottomText="© 2024 Tarladan Sat. Supporting local agriculture through digital transparency."
+      />
     </div>
   );
 }

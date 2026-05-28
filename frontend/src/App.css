@@ -448,6 +448,7 @@
 .signup-field {
   display: grid;
   gap: 8px;
+  align-content: start;
 }
 
 .signup-field span,
@@ -482,6 +483,10 @@
   border-color: #154212;
   box-shadow: 0 0 0 4px rgba(21, 66, 18, 0.08);
   transform: translateY(-1px);
+}
+
+.signup-field .field-error {
+  min-height: 1rem;
 }
 
 .signup-role-group {

@@ -9,8 +9,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body,
 #root {
   min-height: 100svh;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {

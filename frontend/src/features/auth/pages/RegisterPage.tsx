@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../../../App.css";
-import { ROUTES } from "../../../app/routes";
+import { ROUTES, navigateTo } from "../../../app/routes";
 import { registerRequest } from "../api";
 import type { RegisterResponse } from "../types";
 
@@ -27,11 +27,20 @@ function RegisterPage() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<RegisterErrors>({});
+  const redirectTimeoutRef = useRef<number | null>(null);
 
   const passwordsMatch =
     password.length > 0 &&
     passwordConfirmation.length > 0 &&
     password === passwordConfirmation;
+
+  useEffect(() => {
+    return () => {
+      if (redirectTimeoutRef.current) {
+        window.clearTimeout(redirectTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,6 +62,9 @@ function RegisterPage() {
       });
 
       setMessage(data.message || "Kayıt başarılı.");
+      redirectTimeoutRef.current = window.setTimeout(() => {
+        navigateTo(ROUTES.login);
+      }, 1500);
     } catch (err) {
       const apiError = err as RegisterResponse;
 
@@ -227,9 +239,9 @@ function RegisterPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                {errors.password && (
-                  <small className="field-error">{errors.password[0]}</small>
-                )}
+                <small className="field-error">
+                  {errors.password?.[0] ?? "\u00A0"}
+                </small>
               </label>
 
               <label className="signup-field">
@@ -240,6 +252,9 @@ function RegisterPage() {
                   value={passwordConfirmation}
                   onChange={(e) => setPasswordConfirmation(e.target.value)}
                 />
+                <small className="field-error">
+                  {errors.password_confirmation?.[0] ?? "\u00A0"}
+                </small>
               </label>
             </div>
 
