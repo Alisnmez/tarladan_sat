@@ -1,5 +1,10 @@
 import { ROUTES } from "../../../app/routes";
 import { MobileBottomNav, SiteFooter } from "../../../shared/ui";
+import {
+  MARKETING_FOOTER_CLASS_NAME,
+  marketingFooterBrandDescription,
+  marketingFooterSections,
+} from "../../../shared/ui/site-footer/marketingFooter";
 import "../HowItWorksPage.css";
 
 const HERO_IMAGE =
@@ -215,20 +220,9 @@ function HowItWorksPage() {
       </main>
 
       <SiteFooter
-        className="how-footer"
-        brandDescription="© 2024 Tarladan Sat. Anadolu'nun bereketi, sofranızın lezzeti."
-        sections={[
-          {
-            title: "Platform",
-            links: [
-              { href: ROUTES.howItWorks, label: "Hakkımızda" },
-              { href: ROUTES.howItWorks, label: "Sürdürülebilirlik" },
-              { href: ROUTES.register, label: "Üretici Ol" },
-              { href: ROUTES.howItWorks, label: "İletişim" },
-              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
-            ],
-          },
-        ]}
+        className={MARKETING_FOOTER_CLASS_NAME}
+        brandDescription={marketingFooterBrandDescription}
+        sections={marketingFooterSections}
       />
 
       <MobileBottomNav

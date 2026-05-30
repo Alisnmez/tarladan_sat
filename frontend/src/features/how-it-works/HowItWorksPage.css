@@ -453,15 +453,6 @@
   object-fit: cover;
 }
 
-.how-footer {
-  background: #3a3935;
-  color: #fff;
-}
-
-.how-footer {
-  background: #3a3935;
-}
-
 @media (min-width: 768px) {
   .how-header__nav {
     display: flex;
@@ -526,10 +517,5 @@
 
   .how-cta {
     padding: 48px 16px;
-  }
-
-  .how-footer .ui-footer__container {
-    padding-left: 16px;
-    padding-right: 16px;
   }
 }

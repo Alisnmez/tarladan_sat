@@ -328,11 +328,6 @@
   object-fit: cover;
 }
 
-.landing-footer {
-  background: #3a3935;
-  padding: 48px 0;
-}
-
 @media (max-width: 1024px) {
   .landing-process__inner,
   .landing-trust__grid,
@@ -352,8 +347,7 @@
 
   .landing-process,
   .landing-trust__inner,
-  .landing-cta,
-  .landing-footer .ui-footer__container {
+  .landing-cta {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -377,13 +371,6 @@
     padding: 36px 24px;
   }
 
-  .landing-footer {
-    padding-bottom: 96px;
-  }
-
-  .landing-footer .ui-footer__container {
-    text-align: center;
-  }
 }
 
 @media (max-width: 480px) {
