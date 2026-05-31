@@ -1,5 +1,12 @@
 import { ROUTES } from "../../../app/routes";
 import { InputShell, MobileBottomNav, SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../MyRequestsPage.css";
 
 type BuyerRequest = {
@@ -181,31 +188,11 @@ function MyRequestsPage() {
       </main>
 
       <SiteFooter
-        className="my-requests-footer"
-        brandDescription="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
-        sections={[
-          {
-            title: "Kurumsal",
-            links: [
-              { href: ROUTES.howItWorks, label: "Hakkımızda" },
-              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
-            ],
-          },
-          {
-            title: "Yasal",
-            links: [
-              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
-              { href: ROUTES.howItWorks, label: "Gizlilik Politikası" },
-            ],
-          },
-          {
-            title: "Destek",
-            links: [
-              { href: ROUTES.howItWorks, label: "İletişim" },
-              { href: ROUTES.howItWorks, label: "Sıkça Sorulan Sorular" },
-            ],
-          },
-        ]}
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
 
       <MobileBottomNav

@@ -1,5 +1,12 @@
 import { ROUTES } from "../../../app/routes";
 import { SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../ProductsPage.css";
 
 type Product = {
@@ -191,38 +198,11 @@ function ProductsPage() {
       </main>
 
       <SiteFooter
-        className="discover-footer"
-        brandDescription="Yerel üreticileri destekleyerek daha sağlıklı bir gelecek inşa ediyoruz. Topraktan sofranıza en kısa yol."
-        socialLinks={[
-          { href: ROUTES.home, label: "Dil", icon: "language" },
-          { href: ROUTES.home, label: "Paylaş", icon: "share" },
-        ]}
-        sections={[
-          {
-            title: "Kurumsal",
-            links: [
-              { href: ROUTES.howItWorks, label: "Hakkımızda" },
-              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
-              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
-            ],
-          },
-          {
-            title: "Topluluk",
-            links: [
-              { href: ROUTES.register, label: "Üretici Ol" },
-              { href: ROUTES.discover, label: "Başarı Hikayeleri" },
-              { href: ROUTES.howItWorks, label: "Sıkça Sorulan Sorular" },
-            ],
-          },
-          {
-            title: "İletişim",
-            links: [
-              { href: ROUTES.discover, label: "destek@tarladansat.com" },
-              { href: ROUTES.discover, label: "0850 123 45 67" },
-            ],
-          },
-        ]}
-        bottomText="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
     </div>
   );

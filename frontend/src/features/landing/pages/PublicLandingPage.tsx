@@ -1,10 +1,12 @@
 import { ROUTES } from "../../../app/routes";
 import { MobileBottomNav, SiteFooter } from "../../../shared/ui";
 import {
-  MARKETING_FOOTER_CLASS_NAME,
-  marketingFooterBrandDescription,
-  marketingFooterSections,
-} from "../../../shared/ui/site-footer/marketingFooter";
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../PublicLandingPage.css";
 
 const HERO_IMAGE =
@@ -231,9 +233,11 @@ function PublicLandingPage() {
       </main>
 
       <SiteFooter
-        className={MARKETING_FOOTER_CLASS_NAME}
-        brandDescription={marketingFooterBrandDescription}
-        sections={marketingFooterSections}
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
 
       <MobileBottomNav

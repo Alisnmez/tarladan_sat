@@ -1,5 +1,11 @@
-import { ROUTES } from "../../../app/routes";
 import { SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../RequestManagementPage.css";
 
 type RequestCard = {
@@ -174,33 +180,11 @@ function RequestManagementPage() {
       </main>
 
       <SiteFooter
-        className="requests-footer"
-        brandDescription="Yerel üretimin gücünü dijital dünyanın hızıyla birleştiriyoruz."
-        sections={[
-          {
-            title: "Platform",
-            links: [
-              { href: ROUTES.howItWorks, label: "Hakkımızda" },
-              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
-            ],
-          },
-          {
-            title: "Yardım",
-            links: [
-              { href: ROUTES.howItWorks, label: "İletişim" },
-              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
-            ],
-          },
-          {
-            title: "Bülten",
-            description: "Yeni taleplerden haberdar olun.",
-            newsletter: {
-              placeholder: "E-posta adresi",
-              buttonLabel: "Katıl",
-            },
-          },
-        ]}
-        bottomText="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
     </div>
   );

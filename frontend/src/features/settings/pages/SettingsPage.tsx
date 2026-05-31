@@ -1,5 +1,11 @@
-import { ROUTES } from "../../../app/routes";
 import { FormField, SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../SettingsPage.css";
 
 function SettingsPage() {
@@ -81,21 +87,11 @@ function SettingsPage() {
       </main>
 
       <SiteFooter
-        className="settings-footer"
-        brandDescription="© 2024 Tarladan Sat. Supporting local agriculture through digital transparency."
-        sections={[
-          {
-            title: "Bağlantılar",
-            links: [
-              { href: ROUTES.howItWorks, label: "Our Mission" },
-              { href: ROUTES.producers, label: "Farmer Stories" },
-              { href: ROUTES.howItWorks, label: "Sustainability" },
-              { href: ROUTES.howItWorks, label: "Shipping Policy" },
-              { href: ROUTES.howItWorks, label: "Contact Support" },
-              { href: ROUTES.howItWorks, label: "Terms of Service" },
-            ],
-          },
-        ]}
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
     </div>
   );

@@ -1,5 +1,12 @@
 import { ROUTES } from "../../../app/routes";
 import { SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../ProducerDetailPage.css";
 
 const producerProducts = [
@@ -163,32 +170,11 @@ function ProducerDetailPage() {
       </main>
 
       <SiteFooter
-        className="producer-detail-footer"
-        brandDescription="Yerel uretimin gucunu dijital dunyaya tasiyoruz. Dogrudan ureticiden, taptaze sofraniza."
-        socialLinks={[
-          { href: ROUTES.home, label: "Web", icon: "language" },
-          { href: ROUTES.home, label: "Dogal Yasam", icon: "park" },
-          { href: ROUTES.home, label: "Topluluk", icon: "group" },
-        ]}
-        sections={[
-          {
-            title: "Hakkimizda",
-            links: [
-              { href: ROUTES.howItWorks, label: "Hikayemiz" },
-              { href: ROUTES.howItWorks, label: "Guven ve Dogrulama" },
-              { href: ROUTES.howItWorks, label: "Surdurulebilirlik" },
-            ],
-          },
-          {
-            title: "Yardim",
-            links: [
-              { href: ROUTES.howItWorks, label: "Kullanim Kosullari" },
-              { href: ROUTES.howItWorks, label: "Iletisim" },
-              { href: ROUTES.howItWorks, label: "Sikca Sorulan Sorular" },
-            ],
-          },
-        ]}
-        bottomText="© 2024 Tarladan Sat. Yerel Uretimin Gucu."
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
     </div>
   );

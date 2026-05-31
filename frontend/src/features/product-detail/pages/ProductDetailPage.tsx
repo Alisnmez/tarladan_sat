@@ -1,5 +1,12 @@
 import { ROUTES } from "../../../app/routes";
 import { SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../ProductDetailPage.css";
 
 const galleryImages = [
@@ -228,32 +235,11 @@ function ProductDetailPage() {
       </main>
 
       <SiteFooter
-        className="product-detail-footer"
-        brandDescription="Yerel üreticileri doğrudan tüketicilerle buluşturan, sürdürülebilir tarım destekçisi bir pazar yeri."
-        socialLinks={[
-          { href: ROUTES.home, label: "Topluluk", icon: "social_leaderboard" },
-          { href: ROUTES.home, label: "E-posta", icon: "alternate_email" },
-          { href: ROUTES.home, label: "Sürdürülebilirlik", icon: "eco" },
-        ]}
-        sections={[
-          {
-            title: "Hakkımızda",
-            links: [
-              { href: ROUTES.howItWorks, label: "Hikayemiz" },
-              { href: ROUTES.howItWorks, label: "Sertifikalarımız" },
-              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
-            ],
-          },
-          {
-            title: "Destek",
-            links: [
-              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
-              { href: ROUTES.howItWorks, label: "İletişim" },
-              { href: ROUTES.howItWorks, label: "Yardım Merkezi" },
-            ],
-          },
-        ]}
-        bottomText="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
     </div>
   );

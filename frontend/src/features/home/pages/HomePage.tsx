@@ -1,5 +1,12 @@
 import { ROUTES } from "../../../app/routes";
 import { InputShell, SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../HomePage.css";
 
 const HERO_IMAGE =
@@ -311,39 +318,11 @@ function HomePage() {
       </main>
 
       <SiteFooter
-        className="home-footer"
-        brandDescription="Yerel üretimin gücünü dijital dünyanın imkanlarıyla birleştiriyoruz."
-        socialLinks={[
-          { href: ROUTES.home, label: "Web sitesi", icon: "public" },
-          { href: ROUTES.home, label: "E-posta", icon: "alternate_email" },
-        ]}
-        sections={[
-          {
-            title: "Kurumsal",
-            links: [
-              { href: ROUTES.howItWorks, label: "Hakkımızda" },
-              { href: ROUTES.howItWorks, label: "Güven ve Doğrulama" },
-              { href: ROUTES.howItWorks, label: "Blog" },
-            ],
-          },
-          {
-            title: "Yardım",
-            links: [
-              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
-              { href: ROUTES.howItWorks, label: "KVKK" },
-              { href: ROUTES.howItWorks, label: "İletişim" },
-            ],
-          },
-          {
-            title: "Bülten",
-            description: "Yeni hasat dönemlerinden ve özel indirimlerden haberdar olun.",
-            newsletter: {
-              placeholder: "E-posta adresi",
-              buttonLabel: "Katıl",
-            },
-          },
-        ]}
-        bottomText="© 2024 Tarladan Sat. Yerel Üretimin Gücü."
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
     </div>
   );

@@ -1,5 +1,12 @@
 import { ROUTES } from "../../../app/routes";
 import { InputShell, SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../ProducersPage.css";
 
 type Producer = {
@@ -167,39 +174,11 @@ function ProducersPage() {
       </main>
 
       <SiteFooter
-        className="producers-footer"
-        brandDescription="Doğrudan üreticiden, en taze ve en doğal ürünleri kapınıza getiren güvenilir pazar yeriniz. Yerel tarımı birlikte destekleyelim."
-        socialLinks={[
-          { href: ROUTES.home, label: "Web sitesi", icon: "public" },
-          { href: ROUTES.home, label: "E-posta", icon: "mail" },
-        ]}
-        sections={[
-          {
-            title: "Platform",
-            links: [
-              { href: ROUTES.howItWorks, label: "Misyonumuz" },
-              { href: ROUTES.producers, label: "Çiftçi Hikayeleri" },
-              { href: ROUTES.howItWorks, label: "Sürdürülebilirlik" },
-            ],
-          },
-          {
-            title: "Yardım",
-            links: [
-              { href: ROUTES.howItWorks, label: "Teslimat Politikası" },
-              { href: ROUTES.howItWorks, label: "Destek" },
-              { href: ROUTES.howItWorks, label: "Kullanım Koşulları" },
-            ],
-          },
-          {
-            title: "Bülten",
-            description: "Hasat haberlerinden ilk siz haberdar olun.",
-            newsletter: {
-              placeholder: "E-posta adresi",
-              buttonIcon: "send",
-            },
-          },
-        ]}
-        bottomText="© 2024 Tarladan Sat. Supporting local agriculture through digital transparency."
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
     </div>
   );

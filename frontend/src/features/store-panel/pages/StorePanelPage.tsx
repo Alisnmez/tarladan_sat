@@ -1,5 +1,12 @@
 import { ROUTES } from "../../../app/routes";
 import { FormField, FormSection, InputShell, SiteFooter } from "../../../shared/ui";
+import {
+  GLOBAL_FOOTER_CLASS_NAME,
+  globalFooterBottomText,
+  globalFooterBrandDescription,
+  globalFooterSections,
+  globalFooterSocialLinks,
+} from "../../../shared/ui/site-footer/globalFooter";
 import "../StorePanelPage.css";
 
 function StorePanelPage() {
@@ -136,18 +143,11 @@ function StorePanelPage() {
       </div>
 
       <SiteFooter
-        className="store-panel-footer"
-        brandDescription="© 2024 Tarladan Sat - Yerel Ureticiyi Destekliyoruz"
-        sections={[
-          {
-            title: "Panel",
-            links: [
-              { href: ROUTES.howItWorks, label: "Kullanim Kosullari" },
-              { href: ROUTES.howItWorks, label: "Gizlilik Politikasi" },
-              { href: ROUTES.howItWorks, label: "Satici Rehberi" },
-            ],
-          },
-        ]}
+        className={GLOBAL_FOOTER_CLASS_NAME}
+        brandDescription={globalFooterBrandDescription}
+        socialLinks={globalFooterSocialLinks}
+        sections={globalFooterSections}
+        bottomText={globalFooterBottomText}
       />
     </div>
   );

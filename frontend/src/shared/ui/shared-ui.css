@@ -2,6 +2,11 @@
   margin-top: auto;
 }
 
+.site-footer--global {
+  background: #f0eded;
+  border-top: 1px solid #c2c9bb;
+}
+
 .site-footer--marketing {
   background: #3a3935;
   color: #fff;
