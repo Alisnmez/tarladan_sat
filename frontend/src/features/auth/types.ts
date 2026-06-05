@@ -3,7 +3,7 @@ export type RegisterPayload = {
   last_name: string;
   email: string;
   city: string;
-  role: "buyer" | "producer";
+  role: "buyer" | "seller";
   password: string;
   password_confirmation: string;
 };
@@ -43,7 +43,7 @@ export type AuthUser = {
   first_name: string;
   last_name: string;
   email: string;
-  role: string;
+  role: "buyer" | "seller" | "admin";
   phone: string | null;
   city: string | null;
   status: string;

@@ -134,7 +134,7 @@ function SiteNavbar({
                 <span className="site-nav__user-meta">
                   <span className="site-nav__user-name">{userDisplayName}</span>
                   <span className="site-nav__user-badge">
-                    {authUser?.role === "producer" ? "Üretici" : "Premium Üye"}
+                    {authUser?.role === "seller" ? "Satıcı" : authUser?.role === "admin" ? "Yönetici" : "Premium Üye"}
                   </span>
                 </span>
                 <span className="material-symbols-outlined site-nav__user-chevron" aria-hidden="true">
@@ -156,10 +156,12 @@ function SiteNavbar({
                     <span className="material-symbols-outlined">list_alt</span>
                     <span>Taleplerim</span>
                   </a>
+
                   <a href={ROUTES.stall} className="site-nav__dropdown-link" onClick={() => setMenuOpen(false)}>
                     <span className="material-symbols-outlined">storefront</span>
                     <span>Tezgahım</span>
                   </a>
+                  
                   <a href={ROUTES.requestManagement} className="site-nav__dropdown-link" onClick={() => setMenuOpen(false)}>
                     <span className="material-symbols-outlined">manage_accounts</span>
                     <span>Talep Yönetimi</span>

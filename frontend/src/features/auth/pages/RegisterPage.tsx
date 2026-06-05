@@ -19,7 +19,7 @@ function RegisterPage() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
-  const [role, setRole] = useState<"buyer" | "producer">("buyer");
+  const [role, setRole] = useState<"buyer" | "seller">("buyer");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
@@ -211,17 +211,17 @@ function RegisterPage() {
 
                 <label
                   className={`signup-role-card ${
-                    role === "producer" ? "signup-role-card--active" : ""
+                    role === "seller" ? "signup-role-card--active" : ""
                   }`}
                 >
                   <input
                     type="radio"
                     name="role"
-                    value="producer"
-                    checked={role === "producer"}
-                    onChange={() => setRole("producer")}
+                    value="seller"
+                    checked={role === "seller"}
+                    onChange={() => setRole("seller")}
                   />
-                  <strong>Üretici</strong>
+                  <strong>Satıcı</strong>
                   <span>Ürünlerini listele ve topluluğa ulaş.</span>
                 </label>
               </div>

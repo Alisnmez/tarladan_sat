@@ -12,7 +12,7 @@ import RequestManagementPage from "../features/requests/pages/RequestManagementP
 import MyRequestsPage from "../features/my-requests/pages/MyRequestsPage";
 import StorePanelPage from "../features/store-panel/pages/StorePanelPage";
 import SettingsPage from "../features/settings/pages/SettingsPage";
-import { getAuthSession, isAuthenticated } from "../features/auth/authSession";
+import { getAuthSession, isAuthenticated , getAuthRole } from "../features/auth/authSession";
 import { checkAuth } from "../features/auth/services/checkAuth";
 import SiteNavbar from "../features/layout/SiteNavbar";
 import type { NavPage } from "../features/layout/SiteNavbar";
@@ -42,6 +42,21 @@ type AppPage =
 function getCurrentPage(): AppPage {
   const legacyPath = pathFromLegacyHash(window.location.hash);
   const path = normalizePath(legacyPath ?? window.location.pathname);
+
+  const role = getAuthRole();
+
+  if(path == ROUTES.stall){
+    if(!isAuthenticated()){
+      return "login";
+    }
+    if(role !== "seller"){
+      return "home";
+    }
+
+    return "stall";
+  }
+
+  console.log(role);
 
   if (path === ROUTES.login) {
     return "login";
@@ -81,10 +96,6 @@ function getCurrentPage(): AppPage {
 
   if (path === ROUTES.myRequests) {
     return "my-requests";
-  }
-
-  if (path === ROUTES.stall) {
-    return "stall";
   }
 
   if (path === ROUTES.settings) {

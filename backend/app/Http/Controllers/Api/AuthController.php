@@ -24,7 +24,7 @@ class AuthController extends Controller
             'last_name' => ['required', 'string', 'max:75', 'regex:/^[\pL\s\.]+$/u'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'city' => ['required', 'string', 'max:100'],
-            'role' => ['required', 'in:buyer,producer'],
+            'role' => ['required', 'in:buyer,seller'],
             'password' => ['required', 'min:6', 'confirmed'],
         ]);
 
